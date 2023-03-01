@@ -5,8 +5,9 @@
 const char *startFilePath="/";
 const char *ext="sid";
 AudioSourceSD source(DemoSongs, DemoSongsCount);
+SizeSourceSID size(source);
 AudioKitStream kit;
-SIDPlayer sid(source, kit);
+SIDPlayer sid(source, kit, size);
 
 void setup() {
   Serial.begin(115200);

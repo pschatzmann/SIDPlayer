@@ -2,9 +2,10 @@
 #include "AudioLibs/AudioSourceSD.h"
 #include "AudioLibs/AudioKit.h"
 
-SIDSource source(startFilePath, ext);
+SIDSource source("/", "sid");
+SizeSourceFile size(source);
 AudioKitStream kit;
-SIDPlayer sid(source, kit);
+SIDPlayer sid(source, kit, size);
 
 void setup() {
   Serial.begin(115200);

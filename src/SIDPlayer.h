@@ -13,8 +13,9 @@ namespace audiotools {
  */
 class SIDPlayer : public AudioBaseInfoDependent {
 public:
-  SIDPlayer(AudioSource &source, AudioPrint &output) {
+  SIDPlayer(AudioSource &source, AudioPrint &output, SizeSource &sizeSource) {
     static CodecNOP nop;
+    p_size_source = &sizeSource;
     setAudioInfo(output.audioInfo());
     p_player = new AudioPlayer(source, output, nop);
   }
@@ -104,9 +105,8 @@ public:
 
     if (state == Initial) {
       // load new SID
-      Stream* p_stream = getStream();
-      //int size = p_stream->size();
-      int size=0;//TODO
+      Stream *p_stream = getStream();
+      int size = p_size_source->size();
       sid_data.resize(size);
       p_stream->readBytes(sid_data.data(), size);
 
@@ -133,10 +133,13 @@ protected:
   AudioPlayer *p_player = nullptr;
   Vector<uint8_t> sid_data{0};
   SidPlayer sid;
+  SizeSource *p_size_source = nullptr;
   enum proces_state_enum { Initial, Playing };
   proces_state_enum state = Initial;
 
-  AudioPrint *getOutput() { return (AudioPrint *) p_player->getStreamCopy().getTo(); }
+  AudioPrint *getOutput() {
+    return (AudioPrint *)p_player->getStreamCopy().getTo();
+  }
 };
 
 } // namespace audiotools

@@ -1,4 +1,5 @@
 #pragma once
+#include "SD.h"
 #include <stddef.h>
 #include <stdint.h>
 
@@ -32,7 +33,8 @@ const SidTitle DemoSongs[] = {
     {(uint8_t *)Ocean_Loader_2_sid, Ocean_Loader_2_sid_len, 0},
     {(uint8_t *)International_Karate_sid, International_Karate_sid_len, 0},
     {(uint8_t *)Comic_Bakery_sid, Comic_Bakery_sid_len, 0},
-    {(uint8_t *)Rambo_First_Blood_Part_II_sid, Rambo_First_Blood_Part_II_sid_len, 0},
+    {(uint8_t *)Rambo_First_Blood_Part_II_sid,
+     Rambo_First_Blood_Part_II_sid_len, 0},
     {(uint8_t *)Arkanoid_sid, Arkanoid_sid_len, 0},
     {(uint8_t *)Wizball_sid, Wizball_sid_len, 3},
 };
@@ -74,9 +76,7 @@ public:
     return &stream;
   }
 
-  size_t actualFileSize() {
-    return title_size;
-  }
+  size_t actualFileSize() { return title_size; }
 
   /// File size of actual file
   int size() { return songs.size(); }
@@ -94,4 +94,48 @@ protected:
   size_t title_size = 0;
 };
 
-}
+class SIDPlayer;
+
+/**
+ * @brief Logic to determine the Size of the Stream: File ?
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ */
+class SizeSource {
+public:
+  virtual size_t size() = 0;
+};
+
+/**
+ * @brief Provides the size if the audio source is using Files
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ */
+class SizeSourceFile : public SizeSource {
+public:
+  SizeSourceFile(AudioSource &source) { p_source = &source; }
+  size_t size() override {
+    // get the current stream (which is actually a file)
+    File *p_file = (File *)p_source->nextStream(0);
+    return p_file->size();
+  };
+
+protected:
+  AudioSource *p_source;
+};
+
+/**
+ * @brief Provides the size of the current file for a SIDAudioSource
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ */
+class SizeSourceSID : public SizeSource {
+public:
+  SizeSourceSID(SIDAudioSource &source) { p_source = &source; }
+  size_t size() { return p_source->size(); }
+
+protected:
+  SIDAudioSource *p_source;
+};
+
+} // namespace audiotools
