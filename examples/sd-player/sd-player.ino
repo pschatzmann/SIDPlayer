@@ -1,0 +1,19 @@
+#include "SIDPlayer.h"
+#include "AudioLibs/AudioSourceSD.h"
+#include "AudioLibs/AudioKit.h"
+
+SIDSource source(startFilePath, ext);
+AudioKitStream kit;
+SIDPlayer sid(source, kit);
+
+void setup() {
+  Serial.begin(115200);
+  // open in write mode
+  auto cfg = kit.defaultConfig(TX_MODE);
+  kit.begin(cfg);
+  sid.begin();
+}
+
+void loop() {
+  sid.copy();
+}
