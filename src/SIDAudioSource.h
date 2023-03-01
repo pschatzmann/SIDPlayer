@@ -3,14 +3,11 @@
 #include <stddef.h>
 #include <stdint.h>
 
-#include "audio/arkanoid.h"
 #include "audio/comic.h"
 #include "audio/commando.h" // Good!
 #include "audio/ik.h"       // Good!
 #include "audio/mikie.h"    // Good!
 #include "audio/ocean.h"    // Good!
-#include "audio/rambo.h"
-#include "audio/wizball.h"
 #include "audio/yie.h" // Good!
 
 namespace audio_tools {
@@ -28,17 +25,13 @@ struct SidTitle {
 
 const SidTitle DemoSongs[] = {
     {(uint8_t *)music_Commando_sid, music_Commando_sid_len, 0},
-    {(uint8_t *)Yie_Ar_Kung_Fu_sid, Yie_Ar_Kung_Fu_sid_len, 0},
+    {(uint8_t *)Yie_Ar_Kung_Fu_sid, Yie_Ar_Kung_Fu_sid_len, 18},
     {(uint8_t *)Mikie_sid, Mikie_sid_len, 0},
     {(uint8_t *)Ocean_Loader_2_sid, Ocean_Loader_2_sid_len, 0},
     {(uint8_t *)International_Karate_sid, International_Karate_sid_len, 0},
-    {(uint8_t *)Comic_Bakery_sid, Comic_Bakery_sid_len, 0},
-    {(uint8_t *)Rambo_First_Blood_Part_II_sid,
-     Rambo_First_Blood_Part_II_sid_len, 0},
-    {(uint8_t *)Arkanoid_sid, Arkanoid_sid_len, 0},
-    {(uint8_t *)Wizball_sid, Wizball_sid_len, 3},
+    {(uint8_t *)Comic_Bakery_sid, Comic_Bakery_sid_len, 0}
 };
-const int DemoSongsCount = 9;
+const int DemoSongsCount = 6;
 
 /**
  * @brief AudioSource with SID files which are stored in PROGMEM
