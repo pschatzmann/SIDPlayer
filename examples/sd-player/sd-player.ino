@@ -2,7 +2,9 @@
 #include "AudioLibs/AudioSourceSD.h"
 #include "AudioLibs/AudioKit.h"
 
-SIDSource source("/", "sid");
+const char *startFilePath="/";
+const char* ext="sid";
+AudioSourceSD source(startFilePath, ext);
 SizeSourceFile size(source);
 AudioKitStream kit;
 SIDPlayer sid(source, kit, size);
