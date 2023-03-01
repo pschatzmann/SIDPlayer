@@ -42,7 +42,8 @@ const int DemoSongsCount = 9;
 
 /**
  * @brief AudioSource with SID files which are stored in PROGMEM
- *
+ * @author Phil Schatzmann
+ * @copyright GPLv3
  */
 class SIDAudioSource : AudioSource {
 public:
@@ -93,8 +94,6 @@ protected:
   MemoryStream stream;
   size_t title_size = 0;
 };
-
-class SIDPlayer;
 
 /**
  * @brief Logic to determine the Size of the Stream: File ?
