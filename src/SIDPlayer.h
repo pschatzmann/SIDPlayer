@@ -3,7 +3,7 @@
 #include "SIDAudioSource.h"
 #include "sid-api/SidPlayer.h"
 
-namespace audiotools {
+namespace audio_tools {
 
 /**
  * @brief SID player which is based on the AudioPlayer from the AudioTools
@@ -19,8 +19,9 @@ public:
     setAudioInfo(output.audioInfo());
     p_player = new AudioPlayer(source, output, nop);
   }
-  SIDPlayer(AudioSource &source, AudioStream &output) {
+  SIDPlayer(AudioSource &source, AudioStream &output, SizeSource &sizeSource) {
     static CodecNOP nop;
+    p_size_source = &sizeSource;
     setAudioInfo(output.audioInfo());
     p_player = new AudioPlayer(source, output, nop);
   }

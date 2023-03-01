@@ -13,7 +13,7 @@
 #include "audio/wizball.h"
 #include "audio/yie.h" // Good!
 
-namespace audiotools {
+namespace audio_tools {
 
 /**
  * @brief Information about an individual SID song title
@@ -45,10 +45,10 @@ const int DemoSongsCount = 9;
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class SIDAudioSource : AudioSource {
+class SIDAudioSource : public AudioSource {
 public:
   SIDAudioSource() = default;
-  SIDAudioSource(SidTitle *songs, int count) {
+  SIDAudioSource(const SidTitle *songs, int count) {
     for (int j = 0; j < count; j++) {
       addSong(songs[j]);
     }
@@ -128,9 +128,9 @@ protected:
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class SizeSourceSID : public SizeSource {
+class SIDSizeSource : public SizeSource {
 public:
-  SizeSourceSID(SIDAudioSource &source) { p_source = &source; }
+  SIDSizeSource(SIDAudioSource &source) { p_source = &source; }
   size_t size() { return p_source->size(); }
 
 protected:
