@@ -84,7 +84,7 @@ byte CPU();
 void init(byte subtune);
 // void play(void* userdata, Uint8 *stream, int len );
 void play(Uint8 *stream, int len);
-unsigned int combinedWF(unsigned char num, unsigned char channel, unsigned int *wfarray, int index, unsigned char differ6581, byte freq);
+unsigned int combinedWF(unsigned char num, unsigned char channel, const unsigned int *wfarray, int index, unsigned char differ6581, byte freq);
 void createCombinedWF(unsigned int *wfarray, float bitmul, float bitstrength, float treshold);
 
 //----------------------------- MAIN thread ----------------------------
@@ -1208,7 +1208,7 @@ int SID(unsigned char num, unsigned int baseaddr) // the SID emulation itself ('
 
 // in case you don't like these calculated combined waveforms it's easy to substitute the generated tables by pre-sampled 'exact' versions
 
-unsigned int combinedWF(unsigned char num, unsigned char channel, unsigned int *wfarray, int index, unsigned char differ6581, byte freqh)
+unsigned int combinedWF(unsigned char num, unsigned char channel, const unsigned int *wfarray, int index, unsigned char differ6581, byte freqh)
 {
   static float addf;
   addf = 0.6 + 0.4 / freqh;

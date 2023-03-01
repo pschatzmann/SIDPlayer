@@ -11,6 +11,7 @@ SIDPlayer sid(source, kit, fileSize);
 
 void setup() {
   Serial.begin(115200);
+  AudioLogger::instance().begin(Serial, AudioLogger::Info);
   // open in write mode
   auto cfg = kit.defaultConfig(TX_MODE);
   kit.begin(cfg);

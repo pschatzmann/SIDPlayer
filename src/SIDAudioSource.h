@@ -71,9 +71,11 @@ public:
   /// Returns audio stream at the indicated index (the index is zero based, so
   /// the first value is 0!)
   virtual Stream *selectStream(int index) {
-    SidTitle title = songs[index];
+    LOGI("selectStream: %d", index);
+    SidTitle& title = songs[index];
     stream.setValue(title.data, title.size);
     title_size = title.size;
+    LOGI("actualFileSize: %d", title_size);
     return &stream;
   }
 
@@ -131,7 +133,7 @@ protected:
 class SIDSizeSource : public SizeSource {
 public:
   SIDSizeSource(SIDAudioSource &source) { p_source = &source; }
-  size_t size() { return p_source->size(); }
+  size_t size() { return p_source->actualFileSize(); }
 
 protected:
   SIDAudioSource *p_source;
