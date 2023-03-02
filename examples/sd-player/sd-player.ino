@@ -2,6 +2,9 @@
  * @file player.ino
  * @author Phil Schatzmann
  * @brief Plays the SID files from a SD Drive on an AI Thinker AudioKit
+ * Dependencies:
+ * - https://github.com/pschatzmann/SIDPlayer
+ * - https://github.com/pschatzmann/arduino-audio-tools
  * @version 0.1
  * @date 2023-03-02
  * 
@@ -11,13 +14,13 @@
 
 #include "SIDPlayer.h"
 #include "AudioLibs/AudioSourceSD.h"
-#include "AudioLibs/AudioKit.h"
+// #include "AudioLibs/AudioKit.h"
 
 const char *startFilePath="/";
 const char* ext="sid";
 AudioSourceSD source(startFilePath, ext);
 SizeSourceFile fileSize(source);
-AudioKitStream out; // or replace with your Output Device
+I2SStream out; // or replace with your Output Device e.g. AudioKitStream
 SIDPlayer sid(source, out, fileSize);
 
 void setup() {

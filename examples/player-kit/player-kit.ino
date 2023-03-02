@@ -2,6 +2,10 @@
  * @file player.ino
  * @author Phil Schatzmann
  * @brief Plays the included demo SID files on an AI Thinker AudioKit
+ * Dependencies:
+ * - https://github.com/pschatzmann/SIDPlayer
+ * - https://github.com/pschatzmann/arduino-audio-tools
+ * - https://github.com/pschatzmann/arduino-audiokit
  * @version 0.1
  * @date 2023-03-02
  * 

@@ -22,4 +22,4 @@ cd  ~/Documents/Arduino/libraries
 git clone pschatzmann/SIDPlayer.git
 ```
 
-Please do not forget to also install the [AudioTools](https://github.com/pschatzmann/arduino-audio-tools).
+And please do not forget to also install the [AudioTools](https://github.com/pschatzmann/arduino-audio-tools)!

@@ -2,6 +2,9 @@
  * @file player.ino
  * @author Phil Schatzmann
  * @brief Plays the included demo SID files to the defined output (e.g. on a regurlar ESP32)
+ * Dependencies:
+ * - https://github.com/pschatzmann/SIDPlayer
+ * - https://github.com/pschatzmann/arduino-audio-tools
  * @version 0.1
  * @date 2023-03-02
  * 
