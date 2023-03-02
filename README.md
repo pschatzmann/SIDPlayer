@@ -6,12 +6,14 @@ To get some SID files, I can recommend The [High Voltage SID Collection (HVSC)](
 
 Unfortunately we can not feed SID files incrementally to a codec, so this does not fit with my audio codecs that are used e.g. in the AudioPlayer of the AudioTools library.
 
-Therefore this project provides a __SID player__ that can play SID from files or from in memory hex dumps on Arduino. The player is based on the AudioPlayer from the [Arduino Audio Tools](https://github.com/pschatzmann/arduino-audio-tools), so you can use __different audio sources and audio sinks__. Further information can be found [here](https://github.com/pschatzmann/arduino-audio-tools/wiki/The-Audio-Player-Class).
+Therefore this project provides a __SID player__ that can play SID from files or from in memory hex dumps on Arduino. The player is based on the AudioPlayer from the [Arduino Audio Tools](https://github.com/pschatzmann/arduino-audio-tools), so you can use __different audio sources and audio sinks__. 
 
 ### Documentation
 
 - [Class Documentation](https://pschatzmann.github.io/SIDPlayer/docs/html/annotated.html)
 - [AudioTools Wiki](https://github.com/pschatzmann/arduino-audio-tools/wiki)
+- [AudioTools Audio Player](https://github.com/pschatzmann/arduino-audio-tools/wiki/The-Audio-Player-Class)
+- [Supported Output Devices](https://pschatzmann.github.io/arduino-audio-tools/group__io.html)
 
 ### Installation
 
