@@ -7,7 +7,8 @@ namespace audio_tools {
 
 /**
  * @brief SID player which is based on the AudioPlayer from the AudioTools
- * project and the SidPlayer provided by Gunnar Larsen
+ * project and the SidPlayer provided by Gunnar Larsen. 
+ * The SID emulation is based on cSID light by Hermit (Mihaly Horvath), (Year 2017).
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
