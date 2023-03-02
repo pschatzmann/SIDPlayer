@@ -1,20 +1,21 @@
 /**
  * @file player.ino
  * @author Phil Schatzmann
- * @brief Plays the included demo SID files to the defined output (e.g. on a regurlar ESP32)
+ * @brief Plays the included demo SID files on an AI Thinker AudioKit
  * @version 0.1
  * @date 2023-03-02
  * 
  * @copyright Copyright (c) 2023
  * 
  */
+
 #include "SIDPlayer.h"
+#include "AudioLibs/AudioKit.h"
 
 SIDAudioSource source(DemoSongs, DemoSongsCount);
 SIDSizeSource sidSize(source);
-I2SStream out; // or AnalogAudioStream or PWMStream etc
-AudioActions actions;
-SIDPlayer sid(source, out, sidSize);
+AudioKitStream kit;
+SIDPlayer sid(source, kit, sidSize);
 
 void previous(bool, int, void*) { sid.previous(); }
 void next(bool, int, void*) { sid.next(); }
@@ -25,14 +26,12 @@ void setup() {
   Serial.begin(115200);
   AudioLogger::instance().begin(Serial, AudioLogger::Info);
 
-  // setup button pins
-  actions.add(12, previous);
-  actions.add(13, next);
-  actions.add(14, volumeUp);
-  actions.add(15, volumeDown);
-
-  auto cfg = out.defaultConfig(TX_MODE);
-  out.begin(cfg);
+  auto cfg = kit.defaultConfig(TX_MODE);
+  kit.begin(cfg);
+  kit.addAction(PIN_KEY3, previous);
+  kit.addAction(PIN_KEY4, next);
+  kit.addAction(PIN_KEY5, volumeUp);
+  kit.addAction(PIN_KEY6, volumeDown);
 
   // move to next song after playing for 5 minuts
   sid.setTimeout(60*5);

@@ -62,6 +62,9 @@ public:
   /// halts the playing
   virtual void stop() { player.stop(); }
 
+  /// moves to previous file
+  virtual bool previous(int offset = 1) { return player.previous(offset); }
+
   /// moves to next file or nth next file when indicating an offset. Negative
   /// values are supported to move back.
   virtual bool next(int offset = 1) { return player.next(offset); }
@@ -71,9 +74,6 @@ public:
 
   /// moves to selected file
   virtual bool setPath(const char *path) { return player.setPath(path); }
-
-  /// moves to previous file
-  virtual bool previous(int offset = 1) { return player.previous(offset); }
 
   /// Provides the actual stream (=e.g.file)
   virtual Stream *getStream() { return player.getStream(); }
@@ -102,6 +102,11 @@ public:
   /// Checks if silence_on_inactive has been activated (default false)
   bool isSilenceOnInactive() { return player.isSilenceOnInactive(); }
 
+  /// automatically move to next song after the timeout (in seconds) has expired;
+  void setTimeout(size_t timeout){
+    timeout_sec = timeout;
+  }
+
   /// Call this method in the loop.
   virtual void copy() {
     TRACED();
@@ -115,8 +120,13 @@ public:
 
     if (state == Initial) {
       loadSID();
+      setIsPlayingTimeout();
     } else {
       playSID();
+      // We can set a timeout for each song
+      if(isPlayingTimedOut()){
+        moveNextOnEnd();
+      }
     }
   }
 
@@ -129,6 +139,8 @@ protected:
   SizeSource *p_size_source = nullptr;
   enum proces_state_enum { Initial, Playing };
   proces_state_enum state = Initial;
+  size_t timeout_sec = 0;
+  size_t playing_timout_ms = 0;
 
   Print *getOutput() { return player.getStreamCopy().getTo(); }
 
@@ -157,14 +169,23 @@ protected:
     moveNextOnEnd(bytes_read);
   }
 
-  void moveNextOnEnd(size_t bytesProcessed) {
+  /// calculates when the song expires
+  void setIsPlayingTimeout(){
+    if (timeout_sec>0){
+      playing_timout_ms = millis()+(timeout_sec/1000);
+    }
+  }
+
+  /// checks if the song has expired
+  bool isPlayingTimedOut(){
+    return (playing_timout_ms==0)? false : millis()>playing_timout_ms;
+  }
+
+  void moveNextOnEnd(size_t bytesProcessed=1) {
     if (bytesProcessed == 0) {
       state = Initial;
       // move to next play
-      if (!next(1)) {
-        // restart
-        setIndex(0);
-      }
+      next(1);
     }
   }
 };
