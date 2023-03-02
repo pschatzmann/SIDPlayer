@@ -1,10 +1,10 @@
 # SID Player
 
-In the old days I was rather a Commodere PC guy but I know of colleges of mine that were adicted to the the Commodore 64 and knew it inside out. Here is another project that makes you feel nostalgic: 
+In the old days I was rather a Commodere PC guy but I know of colleges of mine that were addicted to the Commodore 64 and knew it inside out. Here is another project that makes you feel nostalgic: 
 
 __Sound Interface Device (SID)__ is a audio format used by the __Commodore 64__ and 128. 
 
-To get some SID files, I can recommend The [High Voltage SID Collection (HVSC)](https://www.hvsc.c64.org/) which is a freeware hobby project that organises Commodore 64 music into an archive for both musicians and fans alike.
+To get some SID files, I can recommend The [High Voltage SID Collection (HVSC)](https://www.hvsc.c64.org/) which is a freeware hobby project that organizes Commodore 64 music into an archive for both musicians and fans alike.
 
 Unfortunately we can not feed SID files incrementally to a codec, so this does not fit with my audio codecs that are used e.g. in the AudioPlayer of the AudioTools library.
 
