@@ -13,9 +13,9 @@ Therefore this project provides a __SID player__ that can play SID from files or
 ### Documentation
 
 - [Class Documentation](https://pschatzmann.github.io/SIDPlayer/docs/html/annotated.html)
-- [AudioTools Wiki](https://github.com/pschatzmann/arduino-audio-tools/wiki)
 - [AudioTools Audio Player](https://github.com/pschatzmann/arduino-audio-tools/wiki/The-Audio-Player-Class)
 - [Supported Output Devices](https://pschatzmann.github.io/arduino-audio-tools/group__io.html)
+- [AudioTools Wiki](https://github.com/pschatzmann/arduino-audio-tools/wiki)
 
 ### Installation
 
