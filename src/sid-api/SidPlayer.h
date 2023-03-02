@@ -14,7 +14,6 @@
 class SidPlayer {
 
     public:
-
         // the scale defines the max value which is generated
         SidPlayer() {};
 
@@ -25,14 +24,15 @@ class SidPlayer {
         void end();
         void loadTune(unsigned char *tunedata, int tunedatalen, int subtune);
 
-        /// Provides a single sample
-        int16_t readSample();
-
-        /// filles the data with 2 channels
+        /// filles the data with n channels
         size_t read(uint8_t *buffer, size_t bytes);
 
     protected:
         int m_sample_rate = 22050;
         int m_sid_model = 6581;
         int m_channels = 2;
+
+        /// Provides a single sample
+        int16_t readSample();
+
 };

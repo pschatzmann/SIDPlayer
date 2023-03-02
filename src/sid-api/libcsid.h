@@ -9,6 +9,7 @@
 #define DEFAULT_SIDMODEL SIDMODEL_6581
 
 extern void libcsid_init(int samplerate, int sidmodel);
+extern void libcsid_free();
 
 extern int libcsid_load(unsigned char *buffer, int bufferlen, int subtune);
 

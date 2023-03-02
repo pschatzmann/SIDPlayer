@@ -20,7 +20,9 @@ void SidPlayer::setSidModel(int sid_model) { m_sid_model = sid_model; }
 
 void SidPlayer::begin() { libcsid_init(m_sample_rate, m_sid_model); }
 
-void SidPlayer::end() { free(memory); }
+void SidPlayer::end() {
+  libcsid_free();
+}
 
 void SidPlayer::loadTune(unsigned char *tunedata, int tunedatalen,
                          int subtune) {
@@ -45,7 +47,7 @@ size_t SidPlayer::read(uint8_t *buffer, size_t bytes) {
   int16_t *ptr = (int16_t *)buffer;
   for (int j = 0; j < bytes / 4; j++) {
     int16_t sample = readSample();
-    for (int i = 0; i < channels; i++) {
+    for (int i = 0; i < m_channels; i++) {
       *ptr++ = sample;
       result += 1;
     }

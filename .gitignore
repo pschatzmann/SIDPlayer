@@ -1,1 +1,4 @@
 data/
+*.svd
+debug.cfg
+debug_custom.json

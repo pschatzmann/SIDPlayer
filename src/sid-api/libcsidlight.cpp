@@ -1261,6 +1261,14 @@ void libcsid_init(int _samplerate, int _sidmodel)
   requested_SID_model = _sidmodel;
 }
 
+void libcsid_free(){
+  if (memory != NULL) {
+    free(memory);
+    memory = NULL;
+  }
+}
+
+
 int libcsid_load(unsigned char *_buffer, int _bufferlen, int _subtune)
 {
   int readata, strend, subtune_amount, preferred_SID_model[3] = {8580, 8580, 8580};
