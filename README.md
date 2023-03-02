@@ -8,6 +8,11 @@ Unfortunately we can not feed SID files incrementally to a codec, so this does n
 
 Therefore this project provides a __SID player__ that can play SID from files or from in memory hex dumps on Arduino. The player is based on the AudioPlayer from the [Arduino Audio Tools](https://github.com/pschatzmann/arduino-audio-tools), so you can use __different audio sources and audio sinks__. Further information can be found [here](https://github.com/pschatzmann/arduino-audio-tools/wiki/The-Audio-Player-Class).
 
+### Documentation
+
+- [Class Documentation](https://pschatzmann.github.io/SIDPlayer/docs/html/annotated.html)
+- [AudioTools Wiki](https://github.com/pschatzmann/arduino-audio-tools/wiki)
+
 ### Installation
 
 For Arduino you can download the library as zip and call include Library -> zip library. Or you can git clone this project into the Arduino libraries folder e.g. with
