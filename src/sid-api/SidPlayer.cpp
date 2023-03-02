@@ -45,7 +45,8 @@ int16_t SidPlayer::readSample() {
 size_t SidPlayer::read(uint8_t *buffer, size_t bytes) {
   size_t result = 0;
   int16_t *ptr = (int16_t *)buffer;
-  for (int j = 0; j < bytes / 4; j++) {
+  int frames = bytes / sizeof(int16_t) / m_channels;
+  for (int j = 0; j < frames; j++) {
     int16_t sample = readSample();
     for (int i = 0; i < m_channels; i++) {
       *ptr++ = sample;
