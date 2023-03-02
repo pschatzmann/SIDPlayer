@@ -50,7 +50,7 @@ size_t SidPlayer::read(uint8_t *buffer, size_t bytes) {
     int16_t sample = readSample();
     for (int i = 0; i < m_channels; i++) {
       *ptr++ = sample;
-      result += 1;
+      result += 2;
     }
   }
   return result;

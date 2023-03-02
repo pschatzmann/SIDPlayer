@@ -45,4 +45,6 @@ void setup() {
 
 void loop() {
   sid.copy();
+  actions.processActions();
+
 }

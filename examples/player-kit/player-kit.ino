@@ -21,8 +21,8 @@ SIDSizeSource sidSize(source);
 AudioKitStream kit;
 SIDPlayer sid(source, kit, sidSize);
 
-void previous(bool, int, void*) { sid.previous(); }
-void next(bool, int, void*) { sid.next(); }
+void previous(bool, int, void*) { TRACEI(); sid.previous(); }
+void next(bool, int, void*) { TRACEI(); sid.next(); }
 void volumeUp(bool, int, void*) { sid.setVolume(sid.volume()+0.2); }
 void volumeDown(bool, int, void*) { sid.setVolume(sid.volume()-0.2);  }
 
@@ -31,11 +31,14 @@ void setup() {
   AudioLogger::instance().begin(Serial, AudioLogger::Info);
 
   auto cfg = kit.defaultConfig(TX_MODE);
+  cfg.channels = 1; // 1 or 2 working 
+  cfg.sample_rate = 8000; // use whatever is supported by the audiokit
   kit.begin(cfg);
+
   kit.addAction(PIN_KEY3, previous);
   kit.addAction(PIN_KEY4, next);
-  kit.addAction(PIN_KEY5, volumeUp);
-  kit.addAction(PIN_KEY6, volumeDown);
+  kit.addAction(PIN_KEY5, volumeDown);
+  kit.addAction(PIN_KEY6, volumeUp);
 
   // move to next song after playing for 5 minuts
   sid.setTimeout(60*5);
@@ -45,4 +48,5 @@ void setup() {
 
 void loop() {
   sid.copy();
+  kit.processActions();
 }

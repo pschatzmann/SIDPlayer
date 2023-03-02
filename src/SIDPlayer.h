@@ -13,7 +13,6 @@ namespace audio_tools {
  */
 class SIDPlayer : public AudioBaseInfoDependent {
 public:
-
   SIDPlayer(AudioSource &source, AudioPrint &output, SizeSource &sizeSource) {
     static CodecNOP nop;
     p_size_source = &sizeSource;
@@ -70,17 +69,29 @@ public:
   void stop() { player.stop(); }
 
   /// moves to previous file
-  bool previous(int offset = 1) { return player.previous(offset); }
+  bool previous(int offset = 1) {
+    state = Initial;
+    return player.previous(offset);
+  }
 
   /// moves to next file or nth next file when indicating an offset. Negative
   /// values are supported to move back.
-  bool next(int offset = 1) { return player.next(offset); }
+  bool next(int offset = 1) {
+    state = Initial;
+    return player.next(offset);
+  }
 
   /// moves to selected file
-  bool setIndex(int idx) { return player.setIndex(idx); }
+  bool setIndex(int idx) {
+    state = Initial;
+    return player.setIndex(idx);
+  }
 
   /// moves to selected file
-  bool setPath(const char *path) { return player.setPath(path); }
+  bool setPath(const char *path) {
+    state = Initial;
+    return player.setPath(path);
+  }
 
   /// Provides the actual stream (=e.g.file)
   Stream *getStream() { return player.getStream(); }
@@ -151,6 +162,7 @@ protected:
   Print *getOutput() { return player.getStreamCopy().getTo(); }
 
   void loadSID() {
+    TRACEI();
     Stream *p_stream = getStream();
     int size = p_size_source->size();
     sid_data.resize(size);
@@ -161,6 +173,7 @@ protected:
   }
 
   void playSID() {
+    TRACED();
     // play SID
     uint8_t buffer[DEFAULT_BUFFER_SIZE];
     size_t bytes_read = sid.read(buffer, DEFAULT_BUFFER_SIZE);
@@ -191,6 +204,7 @@ protected:
       state = Initial;
       // move to next play
       next(1);
+      state = Initial;
     }
   }
 };
