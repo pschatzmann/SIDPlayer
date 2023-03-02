@@ -7,12 +7,13 @@ namespace audio_tools {
 
 /**
  * @brief SID player which is based on the AudioPlayer from the AudioTools
- * project
+ * project and the SidPlayer provided by Gunnar Larsen
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
 class SIDPlayer : public AudioBaseInfoDependent {
 public:
+
   SIDPlayer(AudioSource &source, AudioPrint &output, SizeSource &sizeSource) {
     static CodecNOP nop;
     p_size_source = &sizeSource;
@@ -29,7 +30,7 @@ public:
   }
 
   /// (Re)Starts the playing of the music (from the beginning)
-  virtual bool begin(int index = 0, bool isActive = true) {
+  bool begin(int index = 0, bool isActive = true) {
     TRACEI();
     // get update audio info from destination
     setAudioInfo(p_info->audioInfo());
@@ -43,7 +44,7 @@ public:
     return player.begin(index, isActive);
   }
   /// Ends the processing
-  virtual void end() {
+  void end() {
     player.end();
     sid.end();
   }
@@ -55,49 +56,49 @@ public:
   void setOutput(Print &output) { player.setOutput(output); }
 
   /// Updates the audio info in the related objects
-  virtual void setAudioInfo(AudioBaseInfo info) override {
+  void setAudioInfo(AudioBaseInfo info) override {
     TRACED();
     this->info = info;
   };
 
-  virtual AudioBaseInfo audioInfo() override { return info; }
+  AudioBaseInfo audioInfo() override { return info; }
 
   /// starts / resumes the playing of a matching song
-  virtual void play() { player.play(); }
+  void play() { player.play(); }
 
   /// halts the playing
-  virtual void stop() { player.stop(); }
+  void stop() { player.stop(); }
 
   /// moves to previous file
-  virtual bool previous(int offset = 1) { return player.previous(offset); }
+  bool previous(int offset = 1) { return player.previous(offset); }
 
   /// moves to next file or nth next file when indicating an offset. Negative
   /// values are supported to move back.
-  virtual bool next(int offset = 1) { return player.next(offset); }
+  bool next(int offset = 1) { return player.next(offset); }
 
   /// moves to selected file
-  virtual bool setIndex(int idx) { return player.setIndex(idx); }
+  bool setIndex(int idx) { return player.setIndex(idx); }
 
   /// moves to selected file
-  virtual bool setPath(const char *path) { return player.setPath(path); }
+  bool setPath(const char *path) { return player.setPath(path); }
 
   /// Provides the actual stream (=e.g.file)
-  virtual Stream *getStream() { return player.getStream(); }
+  Stream *getStream() { return player.getStream(); }
 
   /// determines if the player is active
-  virtual bool isActive() { return player.isActive(); }
+  bool isActive() { return player.isActive(); }
 
   /// determines if the player is active
   operator bool() { return isActive(); }
 
   /// The same like start() / stop()
-  virtual void setActive(bool isActive) { player.setActive(isActive); }
+  void setActive(bool isActive) { player.setActive(isActive); }
 
   /// sets the volume - values need to be between 0.0 and 1.0
-  virtual void setVolume(float volume) { player.setVolume(volume); }
+  void setVolume(float volume) { player.setVolume(volume); }
 
   /// Determines the actual volume
-  virtual float volume() { return player.volume(); }
+  float volume() { return player.volume(); }
 
   /// If set to true the player writes 0 values instead of no data if the player
   /// is inactive
@@ -113,7 +114,7 @@ public:
   void setTimeout(size_t timeout) { timeout_sec = timeout; }
 
   /// Call this method in the loop.
-  virtual void copy() {
+  void copy() {
     TRACED();
 
     if (!isActive()) {
