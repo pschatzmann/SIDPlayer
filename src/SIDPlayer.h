@@ -36,11 +36,17 @@ public:
     info.logInfo();
     assert(info.sample_rate != 0);
     player.setAudioInfo(info);
-    sid.setSampleRate(audioInfo().sample_rate);
+    sid.setSampleRate(info.sample_rate);
+    sid.setChannels(info.channels);
+    sid.begin();
+
     return player.begin(index, isActive);
   }
   /// Ends the processing
-  virtual void end() { player.end(); }
+  virtual void end() {
+    player.end();
+    sid.end();
+  }
 
   /// (Re)defines the audio source
   void setAudioSource(AudioSource &source) { player.setAudioSource(source); }
@@ -102,10 +108,9 @@ public:
   /// Checks if silence_on_inactive has been activated (default false)
   bool isSilenceOnInactive() { return player.isSilenceOnInactive(); }
 
-  /// automatically move to next song after the timeout (in seconds) has expired;
-  void setTimeout(size_t timeout){
-    timeout_sec = timeout;
-  }
+  /// automatically move to next song after the timeout (in seconds) has
+  /// expired;
+  void setTimeout(size_t timeout) { timeout_sec = timeout; }
 
   /// Call this method in the loop.
   virtual void copy() {
@@ -124,7 +129,7 @@ public:
     } else {
       playSID();
       // We can set a timeout for each song
-      if(isPlayingTimedOut()){
+      if (isPlayingTimedOut()) {
         moveNextOnEnd();
       }
     }
@@ -149,7 +154,6 @@ protected:
     int size = p_size_source->size();
     sid_data.resize(size);
     p_stream->readBytes(sid_data.data(), size);
-    sid.init();
     LOGI("loadTune size: %d", size);
     sid.loadTune(sid_data.data(), size, 0);
     state = Playing;
@@ -170,18 +174,18 @@ protected:
   }
 
   /// calculates when the song expires
-  void setIsPlayingTimeout(){
-    if (timeout_sec>0){
-      playing_timout_ms = millis()+(timeout_sec/1000);
+  void setIsPlayingTimeout() {
+    if (timeout_sec > 0) {
+      playing_timout_ms = millis() + (timeout_sec / 1000);
     }
   }
 
   /// checks if the song has expired
-  bool isPlayingTimedOut(){
-    return (playing_timout_ms==0)? false : millis()>playing_timout_ms;
+  bool isPlayingTimedOut() {
+    return (playing_timout_ms == 0) ? false : millis() > playing_timout_ms;
   }
 
-  void moveNextOnEnd(size_t bytesProcessed=1) {
+  void moveNextOnEnd(size_t bytesProcessed = 1) {
     if (bytesProcessed == 0) {
       state = Initial;
       // move to next play

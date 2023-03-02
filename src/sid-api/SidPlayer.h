@@ -19,8 +19,10 @@ class SidPlayer {
         SidPlayer() {};
 
         void setSampleRate(uint16_t sr);
+        void setChannels(uint8_t ch);
         void setSidModel(int sid_model);
-        void init();
+        void begin();
+        void end();
         void loadTune(unsigned char *tunedata, int tunedatalen, int subtune);
 
         /// Provides a single sample
@@ -32,4 +34,5 @@ class SidPlayer {
     protected:
         int m_sample_rate = 22050;
         int m_sid_model = 6581;
+        int m_channels = 2;
 };

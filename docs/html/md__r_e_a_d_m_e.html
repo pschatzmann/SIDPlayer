@@ -75,13 +75,21 @@ $(function() {
 <div class="textblock"><p><b>Sound Interface Device (SID)</b> is a audio format used by the <b>Commodore 64</b> and 128.</p>
 <p>To get some SID files, I can recommend The <a href="https://www.hvsc.c64.org/">High Voltage SID Collection (HVSC)</a> which is a freeware hobby project that organises Commodore 64 music into an archive for both musicians and fans alike.</p>
 <p>Unfortunately we can not feed SID files incrementally to a codec, so this does not fit with my audio codecs that are used e.g. in the AudioPlayer of the AudioTools library.</p>
-<p>Therefore this project provides a <b>SID player</b> that can play SID from files or from in memory hex dumps on Arduino. The player is based on the AudioPlayer from the <a href="https://github.com/pschatzmann/arduino-audio-tools">Arduino Audio Tools</a>, so you can use <b>different audio sources and audio sinks</b>. Further information can be found <a href="https://github.com/pschatzmann/arduino-audio-tools/wiki/The-Audio-Player-Class">here</a>.</p>
+<p>Therefore this project provides a <b>SID player</b> that can play SID from files or from in memory hex dumps on Arduino. The player is based on the AudioPlayer from the <a href="https://github.com/pschatzmann/arduino-audio-tools">Arduino Audio Tools</a>, so you can use <b>different audio sources and audio sinks</b>.</p>
 <h2><a class="anchor" id="autotoc_md1"></a>
+Documentation</h2>
+<ul>
+<li><a href="https://pschatzmann.github.io/SIDPlayer/docs/html/annotated.html">Class Documentation</a></li>
+<li><a href="https://github.com/pschatzmann/arduino-audio-tools/wiki">AudioTools Wiki</a></li>
+<li><a href="https://github.com/pschatzmann/arduino-audio-tools/wiki/The-Audio-Player-Class">AudioTools Audio Player</a></li>
+<li><a href="https://pschatzmann.github.io/arduino-audio-tools/group__io.html">Supported Output Devices</a></li>
+</ul>
+<h2><a class="anchor" id="autotoc_md2"></a>
 Installation</h2>
 <p>For Arduino you can download the library as zip and call include Library -&gt; zip library. Or you can git clone this project into the Arduino libraries folder e.g. with</p>
 <div class="fragment"><div class="line">cd  ~/Documents/Arduino/libraries</div>
 <div class="line">git clone pschatzmann/SIDPlayer.git</div>
-</div><!-- fragment --><p>Please do not forget to also install the <a href="https://github.com/pschatzmann/arduino-audio-tools">AudioTools</a>. </p>
+</div><!-- fragment --><p>And please do not forget to also install the <a href="https://github.com/pschatzmann/arduino-audio-tools">AudioTools</a>! </p>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
 <!-- start footer part -->
