@@ -83,7 +83,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>SID player which is based on the AudioPlayer from the AudioTools project and the SidPlayer provided by Gunnar Larsen.  
+<p>SID player which is based on the AudioPlayer from the AudioTools project and the SidPlayer provided by Gunnar Larsen. The SID emulation is based on cSID light by Hermit (Mihaly Horvath), (Year 2017).  
  <a href="classaudio__tools_1_1_s_i_d_player.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_s_i_d_player_8h_source.html">SIDPlayer.h</a>&gt;</code></p>
@@ -110,14 +110,6 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>begin</b> (int index=
 void&#160;</td><td class="memItemRight" valign="bottom"><b>end</b> ()</td></tr>
 <tr class="memdesc:a4948600ff0483a4ee97e93a93b48d809"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ends the processing. <br /></td></tr>
 <tr class="separator:a4948600ff0483a4ee97e93a93b48d809"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a961ffbf6e1b6a1ecbd6b43480f4cd9cb"><td class="memItemLeft" align="right" valign="top"><a id="a961ffbf6e1b6a1ecbd6b43480f4cd9cb" name="a961ffbf6e1b6a1ecbd6b43480f4cd9cb"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setAudioSource</b> (AudioSource &amp;source)</td></tr>
-<tr class="memdesc:a961ffbf6e1b6a1ecbd6b43480f4cd9cb"><td class="mdescLeft">&#160;</td><td class="mdescRight">(Re)defines the audio source <br /></td></tr>
-<tr class="separator:a961ffbf6e1b6a1ecbd6b43480f4cd9cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad72c60658be201d6486e980f82daf37e"><td class="memItemLeft" align="right" valign="top"><a id="ad72c60658be201d6486e980f82daf37e" name="ad72c60658be201d6486e980f82daf37e"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setOutput</b> (Print &amp;output)</td></tr>
-<tr class="memdesc:ad72c60658be201d6486e980f82daf37e"><td class="mdescLeft">&#160;</td><td class="mdescRight">(Re)defines the output <br /></td></tr>
-<tr class="separator:ad72c60658be201d6486e980f82daf37e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a060d48f78682add19a3d69f61a81a588"><td class="memItemLeft" align="right" valign="top"><a id="a060d48f78682add19a3d69f61a81a588" name="a060d48f78682add19a3d69f61a81a588"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setAudioInfo</b> (AudioBaseInfo info) override</td></tr>
 <tr class="memdesc:a060d48f78682add19a3d69f61a81a588"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the audio info in the related objects. <br /></td></tr>
@@ -199,9 +191,6 @@ Print *&#160;</td><td class="memItemRight" valign="bottom"><b>getOutput</b> ()</
 <tr class="memitem:ae7f67678d139eeaf68b089d0e998a99e"><td class="memItemLeft" align="right" valign="top"><a id="ae7f67678d139eeaf68b089d0e998a99e" name="ae7f67678d139eeaf68b089d0e998a99e"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>loadSID</b> ()</td></tr>
 <tr class="separator:ae7f67678d139eeaf68b089d0e998a99e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9e455f5e9cbdb37ef6512ea59c6f0a7b"><td class="memItemLeft" align="right" valign="top"><a id="a9e455f5e9cbdb37ef6512ea59c6f0a7b" name="a9e455f5e9cbdb37ef6512ea59c6f0a7b"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>playSID</b> ()</td></tr>
-<tr class="separator:a9e455f5e9cbdb37ef6512ea59c6f0a7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad28da4e93c8f8e2993ed763040f4fad9"><td class="memItemLeft" align="right" valign="top"><a id="ad28da4e93c8f8e2993ed763040f4fad9" name="ad28da4e93c8f8e2993ed763040f4fad9"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setIsPlayingTimeout</b> ()</td></tr>
 <tr class="memdesc:ad28da4e93c8f8e2993ed763040f4fad9"><td class="mdescLeft">&#160;</td><td class="mdescRight">calculates when the song expires <br /></td></tr>
@@ -210,18 +199,21 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>setIsPlayingTimeout</
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>isPlayingTimedOut</b> ()</td></tr>
 <tr class="memdesc:a228e56883939494c5fdb2d0047a11ed5"><td class="mdescLeft">&#160;</td><td class="mdescRight">checks if the song has expired <br /></td></tr>
 <tr class="separator:a228e56883939494c5fdb2d0047a11ed5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2f0c8daf6dcadd1677b0273f36eeb50f"><td class="memItemLeft" align="right" valign="top"><a id="a2f0c8daf6dcadd1677b0273f36eeb50f" name="a2f0c8daf6dcadd1677b0273f36eeb50f"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>moveNextOnEnd</b> (size_t bytesProcessed=1)</td></tr>
-<tr class="separator:a2f0c8daf6dcadd1677b0273f36eeb50f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a866ab5078db34ab0438b8805c03814b7"><td class="memItemLeft" align="right" valign="top"><a id="a866ab5078db34ab0438b8805c03814b7" name="a866ab5078db34ab0438b8805c03814b7"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>moveNextOnEnd</b> ()</td></tr>
+<tr class="separator:a866ab5078db34ab0438b8805c03814b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
 <tr class="memitem:a7771a8d2366e2f2e431c7a5eebb723b0"><td class="memItemLeft" align="right" valign="top"><a id="a7771a8d2366e2f2e431c7a5eebb723b0" name="a7771a8d2366e2f2e431c7a5eebb723b0"></a>
 AudioPlayer&#160;</td><td class="memItemRight" valign="bottom"><b>player</b></td></tr>
 <tr class="separator:a7771a8d2366e2f2e431c7a5eebb723b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2e88311f129a20b25c655a0ffde683e7"><td class="memItemLeft" align="right" valign="top"><a id="a2e88311f129a20b25c655a0ffde683e7" name="a2e88311f129a20b25c655a0ffde683e7"></a>
-SidPlayer&#160;</td><td class="memItemRight" valign="bottom"><b>sid</b></td></tr>
-<tr class="separator:a2e88311f129a20b25c655a0ffde683e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8662908b8b75c71c0431ebc42e98981f"><td class="memItemLeft" align="right" valign="top"><a id="a8662908b8b75c71c0431ebc42e98981f" name="a8662908b8b75c71c0431ebc42e98981f"></a>
+<a class="el" href="classaudio__tools_1_1_s_i_d_stream.html">SIDStream</a>&#160;</td><td class="memItemRight" valign="bottom"><b>sid</b></td></tr>
+<tr class="separator:a8662908b8b75c71c0431ebc42e98981f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6db6148529cd637da35263373186558c"><td class="memItemLeft" align="right" valign="top"><a id="a6db6148529cd637da35263373186558c" name="a6db6148529cd637da35263373186558c"></a>
+Print *&#160;</td><td class="memItemRight" valign="bottom"><b>p_out</b></td></tr>
+<tr class="separator:a6db6148529cd637da35263373186558c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aed0509a70ec380706ee1cc441b555067"><td class="memItemLeft" align="right" valign="top"><a id="aed0509a70ec380706ee1cc441b555067" name="aed0509a70ec380706ee1cc441b555067"></a>
 AudioBaseInfoDependent *&#160;</td><td class="memItemRight" valign="bottom"><b>p_info</b></td></tr>
 <tr class="separator:aed0509a70ec380706ee1cc441b555067"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -245,7 +237,7 @@ size_t&#160;</td><td class="memItemRight" valign="bottom"><b>playing_timout_ms</
 <tr class="separator:a3cab4b22bc89f9da7dd74e520f365ae6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>SID player which is based on the AudioPlayer from the AudioTools project and the SidPlayer provided by Gunnar Larsen. </p>
+<div class="textblock"><p>SID player which is based on the AudioPlayer from the AudioTools project and the SidPlayer provided by Gunnar Larsen. The SID emulation is based on cSID light by Hermit (Mihaly Horvath), (Year 2017). </p>
 <dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
 </div><h2 class="groupheader">Member Function Documentation</h2>
