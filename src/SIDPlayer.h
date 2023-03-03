@@ -1,7 +1,7 @@
 #pragma once
 #include "AudioTools.h"
 #include "SIDAudioSource.h"
-#include "sid-api/SidPlayer.h"
+#include "SIDStream.h"
 
 namespace audio_tools {
 
@@ -20,6 +20,7 @@ public:
     player.setAudioSource(source);
     player.setOutput(output);
     p_info = &output;
+    p_out = &output;
   }
   SIDPlayer(AudioSource &source, AudioStream &output, SizeSource &sizeSource) {
     static CodecNOP nop;
@@ -27,6 +28,7 @@ public:
     player.setAudioSource(source);
     player.setOutput(output);
     p_info = &output;
+    p_out = &output;
   }
 
   /// (Re)Starts the playing of the music (from the beginning)
@@ -35,25 +37,26 @@ public:
     // get update audio info from destination
     setAudioInfo(p_info->audioInfo());
     info.logInfo();
-    assert(info.sample_rate != 0);
     player.setAudioInfo(info);
-    sid.setSampleRate(info.sample_rate);
-    sid.setChannels(info.channels);
-    sid.begin();
+    // setup sid stream
+    auto cfg = sid.defaultConfig();
+    cfg.copyFrom(info);
+    sid.begin(cfg);
 
-    return player.begin(index, isActive);
+    // setup player
+    bool result = player.begin(index, isActive);
+
+    // we can just copy the audio from the sid stream
+    StreamCopy *p_copy = &player.getStreamCopy();
+    p_copy->begin(*getOutput(), sid);
+    player.setActive(true);
+    return result;
   }
   /// Ends the processing
   void end() {
     player.end();
     sid.end();
   }
-
-  /// (Re)defines the audio source
-  void setAudioSource(AudioSource &source) { player.setAudioSource(source); }
-
-  /// (Re)defines the output
-  void setOutput(Print &output) { player.setOutput(output); }
 
   /// Updates the audio info in the related objects
   void setAudioInfo(AudioBaseInfo info) override {
@@ -140,7 +143,8 @@ public:
       loadSID();
       setIsPlayingTimeout();
     } else {
-      playSID();
+      // play sid file
+      player.copy();
       // We can set a timeout for each song
       if (isPlayingTimedOut()) {
         moveNextOnEnd();
@@ -150,7 +154,8 @@ public:
 
 protected:
   AudioPlayer player;
-  SidPlayer sid;
+  SIDStream sid;
+  Print *p_out;
   AudioBaseInfoDependent *p_info;
   AudioBaseInfo info;
   Vector<uint8_t> sid_data{0};
@@ -160,7 +165,7 @@ protected:
   size_t timeout_sec = 0;
   size_t playing_timout_ms = 0;
 
-  Print *getOutput() { return player.getStreamCopy().getTo(); }
+  Print *getOutput() { return player.getVolumeOutput(); }
 
   void loadSID() {
     TRACEI();
@@ -173,25 +178,10 @@ protected:
     state = Playing;
   }
 
-  void playSID() {
-    TRACED();
-    // play SID
-    uint8_t buffer[DEFAULT_BUFFER_SIZE];
-    size_t bytes_read = sid.read(buffer, DEFAULT_BUFFER_SIZE);
-    Print *p_out = getOutput();
-    if (p_out == nullptr) {
-      LOGE("NPE");
-      return;
-    }
-    int count = p_out->write(buffer, bytes_read);
-    LOGD("write %d", count);
-    moveNextOnEnd(bytes_read);
-  }
-
   /// calculates when the song expires
   void setIsPlayingTimeout() {
     if (timeout_sec > 0) {
-      playing_timout_ms = millis() + (timeout_sec / 1000);
+      playing_timout_ms = millis() + (timeout_sec * 1000);
     }
   }
 
@@ -200,13 +190,12 @@ protected:
     return (playing_timout_ms == 0) ? false : millis() > playing_timout_ms;
   }
 
-  void moveNextOnEnd(size_t bytesProcessed = 1) {
-    if (bytesProcessed == 0) {
-      state = Initial;
-      // move to next play
-      next(1);
-      state = Initial;
-    }
+  void moveNextOnEnd() {
+    TRACEI();
+    state = Initial;
+    // move to next play
+    next(1);
+    state = Initial;
   }
 };
 
