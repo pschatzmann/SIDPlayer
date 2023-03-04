@@ -21,6 +21,7 @@ add_executable (player-desktop player-desktop.ino)
 # set preprocessor defines
 target_compile_definitions(arduino_emulator PUBLIC -DDEFINE_MAIN)
 target_compile_definitions(player-desktop PUBLIC -DARDUINO -DIS_DESKTOP -DEXIT_ON_STOP)
+target_compile_definitions(sidplayer PUBLIC -DARDUINO -DIS_DESKTOP -DEXIT_ON_STOP)
 
 # specify libraries
 target_link_libraries(player-desktop sidplayer arduino_emulator arduino-audio-tools)

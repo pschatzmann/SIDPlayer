@@ -31,8 +31,8 @@ void setup() {
   AudioLogger::instance().begin(Serial, AudioLogger::Error);
 
   auto cfg = out.defaultConfig();
-  cfg.sample_rate = 44100;
-  cfg.channels = 2;
+  cfg.sample_rate = 8000;
+  cfg.channels = 1;
   cfg.bits_per_sample = 16;
   out.begin(cfg);
   wav.begin(cfg);
