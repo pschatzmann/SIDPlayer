@@ -1,5 +1,7 @@
 #pragma once
+#ifndef IS_DESKTOP
 #include "SD.h"
+#endif
 #include <stddef.h>
 #include <stdint.h>
 
@@ -100,6 +102,8 @@ public:
   virtual size_t size() = 0;
 };
 
+#ifndef IS_DESKTOP
+
 /**
  * @brief Provides the size if the audio source is using Files
  * @author Phil Schatzmann
@@ -118,6 +122,8 @@ protected:
   AudioSource *p_source;
 };
 
+#endif
+
 /**
  * @brief Provides the size of the current file for a SIDAudioSource
  * @author Phil Schatzmann
@@ -131,5 +137,6 @@ public:
 protected:
   SIDAudioSource *p_source;
 };
+
 
 } // namespace audiotools
