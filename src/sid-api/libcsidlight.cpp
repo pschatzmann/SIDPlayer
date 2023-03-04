@@ -62,7 +62,11 @@ int phaseaccu[9], prevaccu[9], prevlowpass[3], prevbandpass[3];
 float ratecnt[9], cutoff_ratio_8580, cutoff_steepness_6581, cap_6581_reciprocal; //, cutoff_ratio_6581, cutoff_bottom_6581, cutoff_top_6581;
 // player-related variables:
 int SIDamount = 1, SID_model[3] = {8580, 8580, 8580}, requested_SID_model = -1, sampleratio;
-byte *filedata, *memory, timermode[0x20], SIDtitle[0x20], SIDauthor[0x20], SIDinfo[0x20];
+
+byte *filedata;             // pointer to incoming psid data
+byte memory[MAX_DATA_LEN];  // represents the memory map of the virtual C64 environment
+byte timermode[0x20], SIDtitle[0x20], SIDauthor[0x20], SIDinfo[0x20];
+
 int subtune = 0, tunelength = -1, default_tunelength = 300, minutes = -1, seconds = -1;
 unsigned int initaddr, playaddr, playaddf, SID_address[3] = {0xD400, 0, 0};
 int samplerate = DEFAULT_SAMPLERATE;
@@ -85,7 +89,7 @@ void init(byte subtune);
 // void play(void* userdata, Uint8 *stream, int len );
 void play(Uint8 *stream, int len);
 unsigned int combinedWF(unsigned char num, unsigned char channel, const unsigned int *wfarray, int index, unsigned char differ6581, byte freq);
-void createCombinedWF(unsigned int *wfarray, float bitmul, float bitstrength, float treshold);
+void createCombinedWF(const unsigned int *wfarray, float bitmul, float bitstrength, float treshold);
 
 //----------------------------- MAIN thread ----------------------------
 
@@ -1254,7 +1258,8 @@ const char *libcsid_gettitle()
 
 void libcsid_init(int _samplerate, int _sidmodel)
 {
-  memory = (byte *)malloc(MAX_DATA_LEN);
+  //memory = (byte *)malloc(MAX_DATA_LEN);
+  memset(memory, 0 MAX_DATA_LEN);
 
   samplerate = _samplerate;
   sampleratio = round(C64_PAL_CPUCLK / samplerate);
@@ -1262,10 +1267,13 @@ void libcsid_init(int _samplerate, int _sidmodel)
 }
 
 void libcsid_free(){
+  memset(memory, 0 MAX_DATA_LEN);
+  /*
   if (memory != NULL) {
     free(memory);
     memory = NULL;
   }
+  */
 }
 
 
