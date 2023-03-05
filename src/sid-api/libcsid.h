@@ -1,4 +1,5 @@
 #pragma once
+#include "SIDConfig.h"
 
 #define MAX_DATA_LEN 65536
 

@@ -52,13 +52,19 @@ public:
   void addSong(SidTitle song) { songs.push_back(song); }
 
   /// Reset actual stream and move to root
-  virtual void begin() { index = 0; }
+  virtual void begin() { 
+    index = 0; 
+    stream.begin();
+  }
 
   /// Returns next audio stream
   virtual Stream *nextStream(int offset) {
     index += offset;
-    if (index > songs.size() || index < 0) {
+    if (index >= songs.size()) {
       index = 0;
+    }
+    if (index < 0) {
+      index = songs.size() - 1;
     }
     return selectStream(index);
   }
@@ -68,9 +74,9 @@ public:
   virtual Stream *selectStream(int index) {
     LOGI("selectStream: %d", index);
     SidTitle& title = songs[index];
-    stream.setValue(title.data, title.size);
+    stream.setValue(title.data, title.size, FLASH_RAM);
     title_size = title.size;
-    LOGI("actualFileSize: %d", title_size);
+    LOGI("actualFileSize: %d", (int)title_size);
     return &stream;
   }
 
@@ -88,7 +94,7 @@ public:
 protected:
   int index = 0;
   Vector<SidTitle> songs{0};
-  MemoryStream stream;
+  MemoryStream stream{nullptr,0,FLASH_RAM};
   size_t title_size = 0;
 };
 

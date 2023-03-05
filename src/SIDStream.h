@@ -57,11 +57,9 @@ public:
   void loadTune(const unsigned char *tunedata, int tunedatalen,
                           int subtune=0) {
     libcsid_load((unsigned char *)tunedata, tunedatalen, subtune);
-#ifndef IS_DESKTOP
-    printf("SID Title: %s\n", libcsid_gettitle());
-    printf("SID Author: %s\n", libcsid_getauthor());
-    printf("SID Info: %s\n", libcsid_getinfo());
-#endif
+    fprintf( stderr,"SID Title: %s\n", libcsid_gettitle());
+    fprintf( stderr,"SID Author: %s\n", libcsid_getauthor());
+    fprintf( stderr,"SID Info: %s\n", libcsid_getinfo());
   }
 
   /// fill the data with 2 channels

@@ -64,7 +64,15 @@ float ratecnt[9], cutoff_ratio_8580, cutoff_steepness_6581, cap_6581_reciprocal;
 int SIDamount = 1, SID_model[3] = {8580, 8580, 8580}, requested_SID_model = -1, sampleratio;
 
 byte *filedata;             // pointer to incoming psid data
-byte memory[MAX_DATA_LEN];  // represents the memory map of the virtual C64 environment
+#if MEMORY_ALLOCATION_LOGIC==1
+  byte *memory = NULL;
+#elif MEMORY_ALLOCATION_LOGIC==2
+  byte *memory = NULL;
+#else 
+  // static memory
+  byte memory[MAX_DATA_LEN];  // represents the memory map of the virtual C64 environment
+#endif
+
 byte timermode[0x20], SIDtitle[0x20], SIDauthor[0x20], SIDinfo[0x20];
 
 int subtune = 0, tunelength = -1, default_tunelength = 300, minutes = -1, seconds = -1;
@@ -118,12 +126,12 @@ void init(byte subt)
   }
   else
     frame_sampleperiod = samplerate / PAL_FRAMERATE; // Vsync timing
-  printf("Frame-sampleperiod: %.0f samples  (%.1fX speed)\n", round(frame_sampleperiod), samplerate / PAL_FRAMERATE / frame_sampleperiod);
+  fprintf( stderr,"Frame-sampleperiod: %.0f samples  (%.1fX speed)\n", round(frame_sampleperiod), samplerate / PAL_FRAMERATE / frame_sampleperiod);
   // frame_sampleperiod = (memory[0xDC05]!=0 || (!timermode[subtune] && playaddf))? samplerate/PAL_FRAMERATE : (memory[0xDC04] + memory[0xDC05]*256) / clock_ratio;
   if (playaddf == 0)
   {
     playaddr = ((memory[1] & 3) < 2) ? memory[0xFFFE] + memory[0xFFFF] * 256 : memory[0x314] + memory[0x315] * 256;
-    printf("IRQ-playaddress:%4.4X\n", playaddr);
+    fprintf( stderr,"IRQ-playaddress:%4.4X\n", playaddr);
   }
   else
   {
@@ -150,7 +158,7 @@ void play(Uint8 *stream, int len) // called by SDL at samplerate pace
       finished = 0;
       PC = playaddr;
       SP = 0xFF;
-    } // printf("%d  %f\n",framecnt,playtime); }
+    } // fprintf( stderr,"%d  %f\n",framecnt,playtime); }
     if (finished == 0)
     {
       while (CPUtime <= clock_ratio)
@@ -169,7 +177,7 @@ void play(Uint8 *stream, int len) // called by SDL at samplerate pace
           if (!dynCIA)
           {
             dynCIA = 1;
-            printf("( Dynamic CIA settings. New frame-sampleperiod: %.0f samples  (%.1fX speed) )\n", round(frame_sampleperiod), samplerate / PAL_FRAMERATE / frame_sampleperiod);
+            fprintf( stderr,"( Dynamic CIA settings. New frame-sampleperiod: %.0f samples  (%.1fX speed) )\n", round(frame_sampleperiod), samplerate / PAL_FRAMERATE / frame_sampleperiod);
           }
         }
         if (storadd >= 0xD420 && storadd < 0xD800 && (memory[1] & 3))
@@ -1258,22 +1266,31 @@ const char *libcsid_gettitle()
 
 void libcsid_init(int _samplerate, int _sidmodel)
 {
+#if MEMORY_ALLOCATION_LOGIC==1
+  memory = (byte *)malloc(MAX_DATA_LEN);
+  memset(memory, 0, MAX_DATA_LEN);
+#elif MEMORY_ALLOCATION_LOGIC==2
+  memory = ps_malloc(MAX_DATA_LEN);
+  memset(memory, 0, MAX_DATA_LEN);
+#else 
   //memory = (byte *)malloc(MAX_DATA_LEN);
-  memset(memory, 0 MAX_DATA_LEN);
-
+  memset(memory, 0, MAX_DATA_LEN);
+#endif
   samplerate = _samplerate;
   sampleratio = round(C64_PAL_CPUCLK / samplerate);
   requested_SID_model = _sidmodel;
 }
 
 void libcsid_free(){
-  memset(memory, 0 MAX_DATA_LEN);
-  /*
-  if (memory != NULL) {
+
+#if MEMORY_ALLOCATION_LOGIC==1
     free(memory);
-    memory = NULL;
-  }
-  */
+#elif MEMORY_ALLOCATION_LOGIC==2
+    free(memory);
+#else 
+  memset(memory, 0, MAX_DATA_LEN);
+#endif
+
 }
 
 
@@ -1289,12 +1306,11 @@ int libcsid_load(unsigned char *_buffer, int _bufferlen, int _subtune)
 
   offs = filedata[7];
   loadaddr = filedata[8] + filedata[9] ? filedata[8] * 256 + filedata[9] : filedata[offs] + filedata[offs + 1] * 256;
-  printf("\nOffset: $%4.4X, Loadaddress: $%4.4X \nTimermodes:", offs, loadaddr);
-
+  fprintf( stderr,"\nOffset: $%4.4X, Loadaddress: $%4.4X \nTimermodes:", offs, loadaddr);
   for (i = 0; i < 32; i++)
   {
     timermode[31 - i] = (filedata[0x12 + (i >> 3)] & (byte)pow(2, 7 - i % 8)) ? 1 : 0;
-    printf(" %1d", timermode[31 - i]);
+    fprintf( stderr," %1d", timermode[31 - i]);
   }
 
   for (i = 0; i < MAX_DATA_LEN; i++)
@@ -1351,11 +1367,11 @@ int libcsid_load(unsigned char *_buffer, int _bufferlen, int _subtune)
 
   initaddr = filedata[0xA] + filedata[0xB] ? filedata[0xA] * 256 + filedata[0xB] : loadaddr;
   playaddr = playaddf = filedata[0xC] * 256 + filedata[0xD];
-  printf("\nInit:$%4.4X,Play:$%4.4X, ", initaddr, playaddr);
+  fprintf( stderr,"\nInit:$%4.4X,Play:$%4.4X, ", initaddr, playaddr);
   subtune_amount = filedata[0xF];
   preferred_SID_model[0] = (filedata[0x77] & 0x30) >= 0x20 ? 8580 : 6581;
 
-  printf("Subtunes:%d , preferred SID-model:%d", subtune_amount, preferred_SID_model[0]);
+  fprintf( stderr,"Subtunes:%d , preferred SID-model:%d", subtune_amount, preferred_SID_model[0]);
 
   preferred_SID_model[1] = (filedata[0x77] & 0xC0) >= 0x80 ? 8580 : 6581;
   preferred_SID_model[2] = (filedata[0x76] & 3) >= 3 ? 8580 : 6581;
@@ -1364,13 +1380,12 @@ int libcsid_load(unsigned char *_buffer, int _bufferlen, int _subtune)
 
   SIDamount = 1 + (SID_address[1] > 0) + (SID_address[2] > 0);
   if (SIDamount >= 2)
-    printf("(SID1), %d(SID2:%4.4X)", preferred_SID_model[1], SID_address[1]);
+    fprintf( stderr,"(SID1), %d(SID2:%4.4X)", preferred_SID_model[1], SID_address[1]);
   if (SIDamount == 3)
-    printf(", %d(SID3:%4.4X)", preferred_SID_model[2], SID_address[2]);
+    fprintf( stderr,", %d(SID3:%4.4X)", preferred_SID_model[2], SID_address[2]);
   if (requested_SID_model != -1)
-    printf(" (requested:%d)", requested_SID_model);
-  printf("\n");
-
+    fprintf( stderr," (requested:%d)", requested_SID_model);
+  fprintf( stderr,"\n");
   for (i = 0; i < SIDamount; i++)
   {
     if (requested_SID_model == 8580 || requested_SID_model == 6581)
