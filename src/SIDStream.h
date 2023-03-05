@@ -15,6 +15,11 @@
 
 namespace audio_tools {
 
+/**
+ * @brief Configuration data for a SIDStream
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ */
 class SIDStreamConfig : public AudioBaseInfo {
 public:
   SIDStreamConfig() {
