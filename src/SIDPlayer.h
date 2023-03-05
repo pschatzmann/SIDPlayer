@@ -52,11 +52,7 @@ public:
     // setup player
     player.setAutoNext(false);
     bool result = player.begin(index, isActive);
-
-    // // we can just copy the audio from the sid stream
-    // StreamCopy *p_copy = &player.getStreamCopy();
-    // p_copy->begin(*getOutput(), sid);
-    // player.setActive(true);
+    
     return result;
   }
   /// Ends the processing
@@ -206,10 +202,8 @@ protected:
 
   void moveNextOnEnd() {
     TRACEI();
-    state = Initial;
     // move to next play
     next(1);
-    state = Initial;
   }
 
   /// Make sure that we copy the data from the sid stream to the output
