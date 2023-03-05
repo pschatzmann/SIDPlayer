@@ -27,7 +27,7 @@ struct SidTitle {
 
 const SidTitle DemoSongs[] = {
     {(uint8_t *)music_Commando_sid, music_Commando_sid_len, 0},
-    {(uint8_t *)Yie_Ar_Kung_Fu_sid, Yie_Ar_Kung_Fu_sid_len, 18},
+    {(uint8_t *)Yie_Ar_Kung_Fu_sid, Yie_Ar_Kung_Fu_sid_len, 0},
     {(uint8_t *)Mikie_sid, Mikie_sid_len, 0},
     {(uint8_t *)Ocean_Loader_2_sid, Ocean_Loader_2_sid_len, 0},
     {(uint8_t *)International_Karate_sid, International_Karate_sid_len, 0},

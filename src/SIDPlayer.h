@@ -188,6 +188,7 @@ protected:
       state = Playing;
     } else {
       LOGE("Song is too big!");
+      next(1);
     }
   }
 
