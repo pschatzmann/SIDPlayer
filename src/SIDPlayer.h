@@ -186,6 +186,8 @@ protected:
     if (size<MAX_FILE_SIZE){
       sid.loadTune(sid_data.data(), size, 0);
       state = Playing;
+    } else {
+      LOGE("Song is too big!");
     }
   }
 
