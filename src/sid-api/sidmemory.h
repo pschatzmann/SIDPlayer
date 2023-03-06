@@ -2,8 +2,6 @@
 #include <stdint.h>
 #include <stdio.h>
 
-#define INIT_SIZE 1024
-
 // Memory Manager that avoid to copy any data. We dynamically allocated any accessd memory in segments of 256 bytes
 class SIDMemory {
 public:
