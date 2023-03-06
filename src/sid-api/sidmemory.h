@@ -18,11 +18,14 @@ public:
     this->len = len - offset - 2;
   }
 
+  /// Access via index
   uint8_t &operator[](int idx) {
+    // data e.g. stored in PROGMEM
     if (idx >= start && idx < start + len) {
       return data[idx - start];
     }
 
+    // Dynamically allocated memory based on the requested address
     int dyn_idx = idx / 256;
     int dyn_offset = idx % 256;
     uint8_t *tmp = dynamic_data[dyn_idx];
@@ -33,6 +36,7 @@ public:
     return tmp[dyn_offset];
   }
 
+  /// Release all allocated memory
   void clear() {
     for (int j=0;j<256;j++){
       uint8_t *tmp = dynamic_data[j];
