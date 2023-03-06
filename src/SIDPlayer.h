@@ -53,10 +53,6 @@ public:
     player.setAutoNext(false);
     bool result = player.begin(index, isActive);
 
-    // // we can just copy the audio from the sid stream
-    // StreamCopy *p_copy = &player.getStreamCopy();
-    // p_copy->begin(*getOutput(), sid);
-    // player.setActive(true);
     return result;
   }
   /// Ends the processing
@@ -178,18 +174,20 @@ protected:
   void loadSID() {
     TRACEI();
     Stream *p_stream = getStream();
-    
+    // allocate memory
     int size = p_size_source->size();
     sid_data.resize(size);
     p_stream->readBytes(sid_data.data(), size);
-    LOGI("loadTune size: %d", size);
+    LOGI("setSID size: %d", size);
     if (size<MAX_FILE_SIZE){
-      sid.loadTune(sid_data.data(), size, 0);
+      sid.setSID(sid_data.data(), size, 0);
       state = Playing;
     } else {
       LOGE("Song is too big!");
       next(1);
     }
+    // release memory again
+    sid_data.resize(0);
   }
 
   /// calculates when the song expires
@@ -206,10 +204,8 @@ protected:
 
   void moveNextOnEnd() {
     TRACEI();
-    state = Initial;
     // move to next play
     next(1);
-    state = Initial;
   }
 
   /// Make sure that we copy the data from the sid stream to the output

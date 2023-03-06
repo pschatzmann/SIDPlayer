@@ -1,4 +1,13 @@
 #pragma once
+
+/**
+ * @brief Defines the size of the memory which is allocated
+ * 
+ */
+#ifndef MAX_DATA_LEN
+#  define MAX_DATA_LEN 65536
+#endif
+
 /**
  * Prevent that we use file sizes which are too big
 */
@@ -11,6 +20,7 @@
  * 1) dynamic allocation with malloc
  * 2) ESP32 using PSRAM (psmalloc) 
  * 3) static allocation
+ * 4) mapped memory (Experimental/avoiding allocations)
  * 
 */
 #ifndef MEMORY_ALLOCATION_LOGIC

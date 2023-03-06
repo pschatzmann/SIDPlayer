@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['play_13',['play',['../classaudio__tools_1_1SIDPlayer.html#a78714f60e4098e46b04e947cc21a27b3',1,'audio_tools::SIDPlayer']]],
-  ['previous_14',['previous',['../classaudio__tools_1_1SIDPlayer.html#a8cc2b5e47b8c860d19f99001309d5565',1,'audio_tools::SIDPlayer']]]
+  ['readbytes_0',['readBytes',['../classaudio__tools_1_1_s_i_d_stream.html#a28a22bf3ba1cdeedec2654303130f625',1,'audio_tools::SIDStream']]],
+  ['readsample_1',['readSample',['../classaudio__tools_1_1_s_i_d_stream.html#aa6c130987e18279c107d0349469f7aa0',1,'audio_tools::SIDStream']]]
 ];

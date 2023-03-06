@@ -10,6 +10,7 @@
 #include <stdlib.h>
 
 #include "libcsid.h"
+#include "sidmemory.h"
 
 typedef unsigned char byte;
 typedef unsigned char Uint8;
@@ -18,7 +19,7 @@ typedef unsigned char Uint8;
 #define C64_PAL_CPUCLK 985248.0
 #define SID_CHANNEL_AMOUNT 3
 #define MAX_FILENAME_LEN 512
-#define MAX_DATA_LEN 65536
+//#define MAX_DATA_LEN 65536
 #define PAL_FRAMERATE 50.06 // 50.0443427 //50.1245419 //(C64_PAL_CPUCLK/63/312.5), selected carefully otherwise some ADSR-sensitive tunes may suffer more:
 // #define DEFAULT_SAMPLERATE 44100.0         //(Soldier of Fortune, 2nd Reality, Alliance, X-tra energy, Jackal, Sanxion, Ultravox, Hard Track, Swing, Myth, LN3, etc.)
 #define CLOCK_RATIO_DEFAULT C64_PAL_CPUCLK / DEFAULT_SAMPLERATE //(50.0567520: lowest framerate where Sanxion is fine, and highest where Myth is almost fine)
@@ -58,7 +59,6 @@ byte ADSRstate[9], expcnt[9], prevSR[9], sourceMSBrise[9];
 short int envcnt[9];
 unsigned int prevwfout[9], prevwavdata[9], sourceMSB[3], noise_LFSR[9];
 int phaseaccu[9], prevaccu[9], prevlowpass[3], prevbandpass[3];
-;
 float ratecnt[9], cutoff_ratio_8580, cutoff_steepness_6581, cap_6581_reciprocal; //, cutoff_ratio_6581, cutoff_bottom_6581, cutoff_top_6581;
 // player-related variables:
 int SIDamount = 1, SID_model[3] = {8580, 8580, 8580}, requested_SID_model = -1, sampleratio;
@@ -68,9 +68,12 @@ byte *filedata;             // pointer to incoming psid data
   byte *memory = NULL;
 #elif MEMORY_ALLOCATION_LOGIC==2
   byte *memory = NULL;
-#else 
+#elif MEMORY_ALLOCATION_LOGIC==3
   // static memory
   byte memory[MAX_DATA_LEN];  // represents the memory map of the virtual C64 environment
+#elif MEMORY_ALLOCATION_LOGIC==4
+  // mapped memory
+  SIDMemory memory;  // represents the memory map of the virtual C64 environment
 #endif
 
 byte timermode[0x20], SIDtitle[0x20], SIDauthor[0x20], SIDinfo[0x20];
@@ -1272,7 +1275,7 @@ void libcsid_init(int _samplerate, int _sidmodel)
 #elif MEMORY_ALLOCATION_LOGIC==2
   memory = ps_malloc(MAX_DATA_LEN);
   memset(memory, 0, MAX_DATA_LEN);
-#else 
+#elif MEMORY_ALLOCATION_LOGIC==3
   //memory = (byte *)malloc(MAX_DATA_LEN);
   memset(memory, 0, MAX_DATA_LEN);
 #endif
@@ -1287,8 +1290,10 @@ void libcsid_free(){
     free(memory);
 #elif MEMORY_ALLOCATION_LOGIC==2
     free(memory);
-#else 
+#elif MEMORY_ALLOCATION_LOGIC==3
   memset(memory, 0, MAX_DATA_LEN);
+#elif MEMORY_ALLOCATION_LOGIC==4
+  memory.clear();
 #endif
 
 }
@@ -1312,7 +1317,11 @@ int libcsid_load(unsigned char *_buffer, int _bufferlen, int _subtune)
     timermode[31 - i] = (filedata[0x12 + (i >> 3)] & (byte)pow(2, 7 - i % 8)) ? 1 : 0;
     fprintf( stderr," %1d", timermode[31 - i]);
   }
+  fprintf( stderr,"\n");
 
+#if MEMORY_ALLOCATION_LOGIC==4
+  memory.set(loadaddr, offs, _buffer, _bufferlen );
+#else
   for (i = 0; i < MAX_DATA_LEN; i++)
   {
     memory[i] = 0;
@@ -1325,6 +1334,7 @@ int libcsid_load(unsigned char *_buffer, int _bufferlen, int _subtune)
       memory[loadaddr + i - (offs + 2)] = filedata[i];
     }
   }
+  #endif
 
   strend = 1;
   for (i = 0; i < 32; i++)

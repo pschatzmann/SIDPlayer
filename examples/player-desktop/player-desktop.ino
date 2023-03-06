@@ -26,11 +26,11 @@ WAVEncoder enc;
 EncodedAudioStream wav(&out, &enc); // final solution
 CsvStream<int16_t> csv(Serial);     // best for checking the audio generation
 NullStream none;                    // best for debuging
-SIDPlayer sid(source, none, sidSize);  // change relevant output
+SIDPlayer sid(source, wav, sidSize);  // change relevant output
 
 void setup() {
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial, AudioLogger::Info);
+  AudioLogger::instance().begin(Serial, AudioLogger::Error);
 
   auto cfg = out.defaultConfig();
   cfg.sample_rate = 8000;
@@ -44,7 +44,7 @@ void setup() {
   none.begin(cfg);
 
   // move to next song after playing for 5 minuts
-  sid.setTimeout(2);
+  sid.setTimeout(60*1);
   sid.begin();
 
 }

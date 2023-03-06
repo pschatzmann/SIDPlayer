@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.6"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>SID Player: audio_tools::SIDStreamConfig Class Reference</title>
+<title>SID Player: audio_tools::SIDMetadata Struct Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -69,39 +69,46 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><b>audio_tools</b></li><li class="navelem"><a class="el" href="classaudio__tools_1_1_s_i_d_stream_config.html">SIDStreamConfig</a></li>  </ul>
+<li class="navelem"><b>audio_tools</b></li><li class="navelem"><a class="el" href="structaudio__tools_1_1_s_i_d_metadata.html">SIDMetadata</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
-<a href="classaudio__tools_1_1_s_i_d_stream_config-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">audio_tools::SIDStreamConfig Class Reference</div></div>
+<a href="structaudio__tools_1_1_s_i_d_metadata-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">audio_tools::SIDMetadata Struct Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>Configuration data for a <a class="el" href="classaudio__tools_1_1_s_i_d_stream.html" title="Provides SID audio data.">SIDStream</a>.  
- <a href="classaudio__tools_1_1_s_i_d_stream_config.html#details">More...</a></p>
+<p>Title and Author from the SID.  
+ <a href="structaudio__tools_1_1_s_i_d_metadata.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_s_i_d_stream_8h_source.html">SIDStream.h</a>&gt;</code></p>
-<div class="dynheader">
-Inheritance diagram for audio_tools::SIDStreamConfig:</div>
-<div class="dyncontent">
- <div class="center">
-  <img src="classaudio__tools_1_1_s_i_d_stream_config.png" alt=""/>
- </div></div>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a0783aef75f6fe56e46f4158f4fe5a404"><td class="memItemLeft" align="right" valign="top"><a id="a0783aef75f6fe56e46f4158f4fe5a404" name="a0783aef75f6fe56e46f4158f4fe5a404"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>logInfo</b> ()</td></tr>
+<tr class="separator:a0783aef75f6fe56e46f4158f4fe5a404"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:a47a57b1e4ea25bf8dda60e96b852f8da"><td class="memItemLeft" align="right" valign="top"><a id="a47a57b1e4ea25bf8dda60e96b852f8da" name="a47a57b1e4ea25bf8dda60e96b852f8da"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>sid_model</b> = 6581</td></tr>
-<tr class="separator:a47a57b1e4ea25bf8dda60e96b852f8da"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af8dd55538a9ebced28fbf965e776ff46"><td class="memItemLeft" align="right" valign="top"><a id="af8dd55538a9ebced28fbf965e776ff46" name="af8dd55538a9ebced28fbf965e776ff46"></a>
+char&#160;</td><td class="memItemRight" valign="bottom"><b>title</b> [32] = {0}</td></tr>
+<tr class="separator:af8dd55538a9ebced28fbf965e776ff46"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5fa819428e8836af2a89e84ff2120350"><td class="memItemLeft" align="right" valign="top"><a id="a5fa819428e8836af2a89e84ff2120350" name="a5fa819428e8836af2a89e84ff2120350"></a>
+char&#160;</td><td class="memItemRight" valign="bottom"><b>author</b> [32] = {0}</td></tr>
+<tr class="separator:a5fa819428e8836af2a89e84ff2120350"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7db9938924724aea964c882b304a7180"><td class="memItemLeft" align="right" valign="top"><a id="a7db9938924724aea964c882b304a7180" name="a7db9938924724aea964c882b304a7180"></a>
+char&#160;</td><td class="memItemRight" valign="bottom"><b>sid_info</b> [32] = {0}</td></tr>
+<tr class="separator:a7db9938924724aea964c882b304a7180"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Configuration data for a <a class="el" href="classaudio__tools_1_1_s_i_d_stream.html" title="Provides SID audio data.">SIDStream</a>. </p>
-<dl class="section author"><dt>Author</dt><dd>Phil Schatzmann </dd></dl>
+<div class="textblock"><p>Title and Author from the SID. </p>
+<dl class="section author"><dt>Author</dt><dd>Gunnar Larsen </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
-</div><hr/>The documentation for this class was generated from the following file:<ul>
+</div><hr/>The documentation for this struct was generated from the following file:<ul>
 <li>src/<a class="el" href="_s_i_d_stream_8h_source.html">SIDStream.h</a></li>
 </ul>
 </div><!-- contents -->

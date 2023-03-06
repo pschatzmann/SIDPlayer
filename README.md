@@ -1,4 +1,4 @@
-# SID Player
+# Playing SID Files
 
 In the old days I was rather a Commodere PC guy but I know of colleges of mine that were addicted to the Commodore 64 and knew it inside out. Here is another project that makes you feel nostalgic: 
 
@@ -8,7 +8,7 @@ To get some SID files, I can recommend The [High Voltage SID Collection (HVSC)](
 
 Unfortunately we can not feed SID files incrementally to a codec, so this does not fit with my audio codecs that are used e.g. in the AudioPlayer of the AudioTools library.
 
-Therefore this project provides a separate, dedicated __SID player__ that can play SID from files or from in memory hex dumps __on Arduino__. The player is based on the AudioPlayer from the [Arduino Audio Tools](https://github.com/pschatzmann/arduino-audio-tools), so you can use __different audio sources and audio sinks__. The SID emulation is based on cSID light by Hermit (Mihaly Horvath), (Year 2017).
+Therefore this project provides a separate, dedicated __SID stream__ and a __SID player__ that can play SID from files or from in memory hex dumps __on Arduino__. The player is based on the AudioPlayer from the [Arduino Audio Tools](https://github.com/pschatzmann/arduino-audio-tools), so you can use __different audio sources and audio sinks__. The SID emulation is based on cSID light by Hermit (Mihaly Horvath), (Year 2017).
 
 ### Documentation
 
