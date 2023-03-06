@@ -17,5 +17,8 @@ extern int libcsid_load(unsigned char *buffer, int bufferlen, int subtune);
 extern const char *libcsid_getauthor();
 extern const char *libcsid_getinfo();
 extern const char *libcsid_gettitle();
+extern int libcsid_getsubtune_amount();
+extern int libcsid_getsubtune();
 
 extern void libcsid_render(unsigned short *output, int numsamples);
+

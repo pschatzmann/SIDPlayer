@@ -39,10 +39,14 @@ struct SIDMetadata {
   char title[32] = {0};
   char author[32] = {0};
   char sid_info[32] = {0};
+  int subtune_max;
+  int subtune_current;
 
   void logInfo() {
     LOGI("SID Title: %s", title);
     LOGI("SID Author: %s", author);
+    LOGI("subtune_current: %d", subtune_current);
+    LOGI("subtune_max: %d", subtune_max);
     LOGI("SID Info: %s", libcsid_getinfo());
   }
 };
@@ -102,7 +106,7 @@ public:
   }
 
   /// @brief  Stops processing and releases the memory
-  void end() {
+  void end() override {
     active = false;
     libcsid_free();
   }
@@ -125,6 +129,11 @@ public:
     memcpy(meta.author, libcsid_getauthor(), sizeof(meta.author));
     memcpy(meta.title, libcsid_gettitle(), sizeof(meta.author));
     memcpy(meta.sid_info, libcsid_getinfo(), sizeof(meta.sid_info));
+
+    // subtune information
+    meta.subtune_max = libcsid_getsubtune_amount();
+    meta.subtune_current = libcsid_getsubtune();
+
     meta.logInfo();
   }
 

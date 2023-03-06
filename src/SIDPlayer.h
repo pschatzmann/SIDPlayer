@@ -23,6 +23,7 @@ public:
     p_info = &output;
     p_out = &output;
   }
+  
   SIDPlayer(AudioSource &source, AudioStream &output, SizeSource &sizeSource) {
     static CodecNOP nop;
     p_size_source = &sizeSource;

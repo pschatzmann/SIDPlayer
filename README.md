@@ -1,6 +1,6 @@
 # Playing SID Files
 
-In the old days I was rather a Commodere PC guy but I know of colleges of mine that were addicted to the Commodore 64 and knew it inside out. Here is another project that makes you feel nostalgic: 
+In the old days I was rather a Commodere PC guy but I know of colleagues of mine that were addicted to the Commodore 64 and knew it inside out. Here is another project that makes you feel nostalgic: 
 
 __Sound Interface Device (SID)__ is a audio format used by the __Commodore 64__ and 128. 
 
