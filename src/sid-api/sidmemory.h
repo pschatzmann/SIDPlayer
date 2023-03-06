@@ -1,12 +1,17 @@
 #pragma once
 #include <stdint.h>
 #include <stdio.h>
-
-// Memory Manager that avoid to copy any data. We dynamically allocated any accessd memory in segments of 256 bytes
+/*
+ * Memory Manager that avoids to copy any data. We dynamically allocate any accessed
+ * memory that is not mapped in segments of 256 bytes
+ * @author Phil Schatzmann
+ * @copyright GPLv3
+ */
 class SIDMemory {
 public:
   SIDMemory() = default;
 
+  /// Map data
   void set(int start, int offset, uint8_t *data, size_t len) {
     fprintf(stderr, "Start: 0x%x\n", start);
     fprintf(stderr, "Offset: 0x%x\n", offset);
@@ -37,9 +42,9 @@ public:
 
   /// Release all allocated memory
   void clear() {
-    for (int j=0;j<256;j++){
+    for (int j = 0; j < 256; j++) {
       uint8_t *tmp = dynamic_data[j];
-      if (tmp!=nullptr){
+      if (tmp != nullptr) {
         free(tmp);
         dynamic_data[j] = nullptr;
       }
