@@ -52,7 +52,7 @@ public:
     // setup player
     player.setAutoNext(false);
     bool result = player.begin(index, isActive);
-    
+
     return result;
   }
   /// Ends the processing
@@ -174,7 +174,7 @@ protected:
   void loadSID() {
     TRACEI();
     Stream *p_stream = getStream();
-    
+    // allocate memory
     int size = p_size_source->size();
     sid_data.resize(size);
     p_stream->readBytes(sid_data.data(), size);
@@ -186,6 +186,8 @@ protected:
       LOGE("Song is too big!");
       next(1);
     }
+    // release memory again
+    sid_data.resize(0);
   }
 
   /// calculates when the song expires
