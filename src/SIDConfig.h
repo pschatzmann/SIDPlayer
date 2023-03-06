@@ -1,4 +1,13 @@
 #pragma once
+
+/**
+ * @brief Defines the size of the memory which is allocated
+ * 
+ */
+#ifndef MAX_DATA_LEN
+#  define MAX_DATA_LEN 65536
+#endif
+
 /**
  * Prevent that we use file sizes which are too big
 */

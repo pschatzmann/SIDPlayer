@@ -1,7 +1,7 @@
 #pragma once
 #include "SIDConfig.h"
 
-#define MAX_DATA_LEN 65536
+//#define MAX_DATA_LEN 65536
 
 #define SIDMODEL_8580 8580
 #define SIDMODEL_6581 6581
