@@ -25,11 +25,12 @@ public:
       return data[idx - start];
     }
 
-    // Dynamically allocated memory based on the requested address
+    // Addresses that are not mapped yet
     int dyn_idx = idx / 256;
     int dyn_offset = idx % 256;
     uint8_t *tmp = dynamic_data[dyn_idx];
     if (tmp == 0) {
+      // Dynamically allocate memory based on the requested address
       tmp = dynamic_data[dyn_idx] = (uint8_t *)calloc(1, 256);
       fprintf(stderr, "Allocate: 0x%x\n", idx);
     }
