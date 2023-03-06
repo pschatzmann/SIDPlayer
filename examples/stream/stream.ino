@@ -16,7 +16,7 @@
 uint16_t sample_rate=32000;
 uint8_t channels = 2; 
 AudioKitStream out; 
-SIDStream sid;
+SIDStream sid(music_Commando_sid, music_Commando_sid_len);
 StreamCopy copier(out, sid); 
 
 // Arduino Setup
@@ -37,7 +37,7 @@ void setup(void) {
   auto scfg = sid.defaultConfig();
   scfg.copyFrom(config);
   sid.begin(scfg);
-  sid.loadTune(music_Commando_sid, music_Commando_sid_len);
+  //sid.setSID(music_Commando_sid, music_Commando_sid_len);
 
 }
 

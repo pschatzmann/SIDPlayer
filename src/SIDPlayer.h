@@ -178,9 +178,9 @@ protected:
     int size = p_size_source->size();
     sid_data.resize(size);
     p_stream->readBytes(sid_data.data(), size);
-    LOGI("loadTune size: %d", size);
+    LOGI("setSID size: %d", size);
     if (size<MAX_FILE_SIZE){
-      sid.loadTune(sid_data.data(), size, 0);
+      sid.setSID(sid_data.data(), size, 0);
       state = Playing;
     } else {
       LOGE("Song is too big!");
