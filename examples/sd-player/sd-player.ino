@@ -13,7 +13,7 @@
  */
 
 #include "SIDPlayer.h"
-#include "AudioLibs/AudioSourceSD.h"
+#include "AudioLibs/AudioSourceIdxSD.h"
 // #include "AudioLibs/AudioKit.h"
 
 // replace with your CS pin
@@ -21,7 +21,7 @@
 
 const char *startFilePath="/SID";
 const char* ext="sid";
-AudioSourceSD source(startFilePath, ext, CS);
+AudioSourceIdxSD source(startFilePath, ext, CS);
 SizeSourceFile fileSize(source);
 I2SStream out; // or replace with your Output Device e.g. AudioKitStream
 SIDPlayer sid(source, out, fileSize);

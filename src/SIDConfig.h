@@ -20,6 +20,7 @@
  * 1) dynamic allocation with malloc
  * 2) ESP32 using PSRAM (psmalloc) 
  * 3) static allocation
+ * 4) mapped memory (Experimental/avoiding allocations)
  * 
 */
 #ifndef MEMORY_ALLOCATION_LOGIC

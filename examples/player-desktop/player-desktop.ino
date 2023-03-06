@@ -44,7 +44,7 @@ void setup() {
   none.begin(cfg);
 
   // move to next song after playing for 5 minuts
-  sid.setTimeout(2);
+  sid.setTimeout(60*1);
   sid.begin();
 
 }
