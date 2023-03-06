@@ -3,7 +3,8 @@ cmake_minimum_required(VERSION 3.20)
 # set the project name
 project(player-desktop)
 set (CMAKE_CXX_STANDARD 11)
-set (DCMAKE_CXX_FLAGS "-Werror")
+set (CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -O0")
+set (CMAKE_LINKER_FLAGS_DEBUG "${CMAKE_LINKER_FLAGS_DEBUG}")
 
 include(FetchContent)
 option(BUILD_SHARED_LIBS "Build using shared libraries" OFF)
@@ -21,6 +22,7 @@ add_executable (player-desktop player-desktop.ino)
 # set preprocessor defines
 target_compile_definitions(arduino_emulator PUBLIC -DDEFINE_MAIN)
 target_compile_definitions(player-desktop PUBLIC -DARDUINO -DIS_DESKTOP -DEXIT_ON_STOP)
+target_compile_definitions(sidplayer PUBLIC -DARDUINO -DIS_DESKTOP -DEXIT_ON_STOP)
 
 # specify libraries
 target_link_libraries(player-desktop sidplayer arduino_emulator arduino-audio-tools)

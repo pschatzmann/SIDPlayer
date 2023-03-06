@@ -2,6 +2,7 @@
 #include "AudioTools.h"
 #include "SIDAudioSource.h"
 #include "SIDStream.h"
+#include "SIDConfig.h"
 
 namespace audio_tools {
 
@@ -43,13 +44,19 @@ public:
     cfg.copyFrom(info);
     sid.begin(cfg);
 
+    // make sure we have valid audio data
+    assert(cfg.channels>0);
+    assert(cfg.sample_rate>0);
+    assert(cfg.bits_per_sample==16);
+
     // setup player
+    player.setAutoNext(false);
     bool result = player.begin(index, isActive);
 
-    // we can just copy the audio from the sid stream
-    StreamCopy *p_copy = &player.getStreamCopy();
-    p_copy->begin(*getOutput(), sid);
-    player.setActive(true);
+    // // we can just copy the audio from the sid stream
+    // StreamCopy *p_copy = &player.getStreamCopy();
+    // p_copy->begin(*getOutput(), sid);
+    // player.setActive(true);
     return result;
   }
   /// Ends the processing
@@ -131,7 +138,6 @@ public:
   /// Call this method in the loop.
   void copy() {
     TRACED();
-
     if (!isActive()) {
       if (isSilenceOnInactive()) {
         player.writeSilence(DEFAULT_BUFFER_SIZE);
@@ -141,7 +147,9 @@ public:
 
     if (state == Initial) {
       loadSID();
-      setIsPlayingTimeout();
+      setIsPlayingTimeout();  
+      setSIDAsInput();
+
     } else {
       // play sid file
       player.copy();
@@ -170,12 +178,18 @@ protected:
   void loadSID() {
     TRACEI();
     Stream *p_stream = getStream();
+    
     int size = p_size_source->size();
     sid_data.resize(size);
     p_stream->readBytes(sid_data.data(), size);
     LOGI("loadTune size: %d", size);
-    sid.loadTune(sid_data.data(), size, 0);
-    state = Playing;
+    if (size<MAX_FILE_SIZE){
+      sid.loadTune(sid_data.data(), size, 0);
+      state = Playing;
+    } else {
+      LOGE("Song is too big!");
+      next(1);
+    }
   }
 
   /// calculates when the song expires
@@ -196,6 +210,13 @@ protected:
     // move to next play
     next(1);
     state = Initial;
+  }
+
+  /// Make sure that we copy the data from the sid stream to the output
+  void setSIDAsInput(){
+    StreamCopy *p_copy = &player.getStreamCopy();
+    p_copy->begin(*getOutput(), sid);
+    player.setActive(true);
   }
 };
 
