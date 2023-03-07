@@ -88,23 +88,37 @@ Inheritance diagram for audio_tools::SIDStream:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr class="memitem:ab59373e8e3bdfbde2d85eb67ba317688"><td class="memItemLeft" align="right" valign="top"><a id="ab59373e8e3bdfbde2d85eb67ba317688"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1SIDStream.html#ab59373e8e3bdfbde2d85eb67ba317688">SIDStream</a> ()=default</td></tr>
+<tr class="memdesc:ab59373e8e3bdfbde2d85eb67ba317688"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new <a class="el" href="classaudio__tools_1_1SIDStream.html" title="Provides SID audio data.">SIDStream</a> object To play a song call begin() and then <a class="el" href="classaudio__tools_1_1SIDStream.html#a20bc3207c71009ebead019f8bdd3b731" title="Loads the tune to be played and starts generating audio.">setSID()</a> <br /></td></tr>
+<tr class="separator:ab59373e8e3bdfbde2d85eb67ba317688"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac6d77b143462480994f74939b6b755c6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1SIDStream.html#ac6d77b143462480994f74939b6b755c6">SIDStream</a> (const unsigned char *tunedata, int tunedatalen, int subtune=0)</td></tr>
+<tr class="memdesc:ac6d77b143462480994f74939b6b755c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new <a class="el" href="classaudio__tools_1_1SIDStream.html" title="Provides SID audio data.">SIDStream</a> object To play a song just call begin()  <a href="classaudio__tools_1_1SIDStream.html#ac6d77b143462480994f74939b6b755c6">More...</a><br /></td></tr>
+<tr class="separator:ac6d77b143462480994f74939b6b755c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae3351b892896758f884ef4e679eef79b"><td class="memItemLeft" align="right" valign="top"><a id="ae3351b892896758f884ef4e679eef79b"></a>
-<a class="el" href="classaudio__tools_1_1SIDStreamConfig.html">SIDStreamConfig</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1SIDStream.html#ae3351b892896758f884ef4e679eef79b">defaultConfig</a> ()</td></tr>
+<a class="el" href="structaudio__tools_1_1SIDStreamConfig.html">SIDStreamConfig</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1SIDStream.html#ae3351b892896758f884ef4e679eef79b">defaultConfig</a> ()</td></tr>
 <tr class="memdesc:ae3351b892896758f884ef4e679eef79b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the default configuration. <br /></td></tr>
 <tr class="separator:ae3351b892896758f884ef4e679eef79b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8dcfafdccb6a3a63dfbc20076e00301d"><td class="memItemLeft" align="right" valign="top"><a id="a8dcfafdccb6a3a63dfbc20076e00301d"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>begin</b> (<a class="el" href="classaudio__tools_1_1SIDStreamConfig.html">SIDStreamConfig</a> cfg)</td></tr>
-<tr class="separator:a8dcfafdccb6a3a63dfbc20076e00301d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad58dbf55a40535e91f7918d404e8dcc2"><td class="memItemLeft" align="right" valign="top"><a id="ad58dbf55a40535e91f7918d404e8dcc2"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>end</b> ()</td></tr>
-<tr class="separator:ad58dbf55a40535e91f7918d404e8dcc2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9d6816083846081449ca0c6622313af2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1SIDStream.html#a9d6816083846081449ca0c6622313af2">loadTune</a> (const unsigned char *tunedata, int tunedatalen, int subtune=0)</td></tr>
-<tr class="memdesc:a9d6816083846081449ca0c6622313af2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Loads the tune to be played.  <a href="classaudio__tools_1_1SIDStream.html#a9d6816083846081449ca0c6622313af2">More...</a><br /></td></tr>
-<tr class="separator:a9d6816083846081449ca0c6622313af2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2312372efca9f92a48552505efc8568d"><td class="memItemLeft" align="right" valign="top"><a id="a2312372efca9f92a48552505efc8568d"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>begin</b> (<a class="el" href="structaudio__tools_1_1SIDStreamConfig.html">SIDStreamConfig</a> config)</td></tr>
+<tr class="separator:a2312372efca9f92a48552505efc8568d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a48475be554617c8e02d47a72fd76245b"><td class="memItemLeft" align="right" valign="top"><a id="a48475be554617c8e02d47a72fd76245b"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1SIDStream.html#a48475be554617c8e02d47a72fd76245b">end</a> () override</td></tr>
+<tr class="memdesc:a48475be554617c8e02d47a72fd76245b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stops processing and releases the memory. <br /></td></tr>
+<tr class="separator:a48475be554617c8e02d47a72fd76245b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a20bc3207c71009ebead019f8bdd3b731"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1SIDStream.html#a20bc3207c71009ebead019f8bdd3b731">setSID</a> (const unsigned char *tunedata, int tunedatalen, int subtune=0)</td></tr>
+<tr class="memdesc:a20bc3207c71009ebead019f8bdd3b731"><td class="mdescLeft">&#160;</td><td class="mdescRight">Loads the tune to be played and starts generating audio.  <a href="classaudio__tools_1_1SIDStream.html#a20bc3207c71009ebead019f8bdd3b731">More...</a><br /></td></tr>
+<tr class="separator:a20bc3207c71009ebead019f8bdd3b731"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a28a22bf3ba1cdeedec2654303130f625"><td class="memItemLeft" align="right" valign="top"><a id="a28a22bf3ba1cdeedec2654303130f625"></a>
 size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1SIDStream.html#a28a22bf3ba1cdeedec2654303130f625">readBytes</a> (uint8_t *buffer, size_t bytes) override</td></tr>
 <tr class="memdesc:a28a22bf3ba1cdeedec2654303130f625"><td class="mdescLeft">&#160;</td><td class="mdescRight">fill the data with 2 channels <br /></td></tr>
 <tr class="separator:a28a22bf3ba1cdeedec2654303130f625"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a325eef8096aa74c3bbc4189b96ad524b"><td class="memItemLeft" align="right" valign="top"><a id="a325eef8096aa74c3bbc4189b96ad524b"></a>
+<a class="el" href="structaudio__tools_1_1SIDMetadata.html">SIDMetadata</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1SIDStream.html#a325eef8096aa74c3bbc4189b96ad524b">getMetadata</a> ()</td></tr>
+<tr class="memdesc:a325eef8096aa74c3bbc4189b96ad524b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provide the metadata for the sid. <br /></td></tr>
+<tr class="separator:a325eef8096aa74c3bbc4189b96ad524b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa4bc95f1efd9cc2e747fd7177317e9c4"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1SIDStream.html#aa4bc95f1efd9cc2e747fd7177317e9c4">isActive</a> (int timeoutMs=2000)</td></tr>
+<tr class="separator:aa4bc95f1efd9cc2e747fd7177317e9c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
@@ -112,20 +126,32 @@ Protected Member Functions</h2></td></tr>
 int16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classaudio__tools_1_1SIDStream.html#aa6c130987e18279c107d0349469f7aa0">readSample</a> ()</td></tr>
 <tr class="memdesc:aa6c130987e18279c107d0349469f7aa0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides a single sample. <br /></td></tr>
 <tr class="separator:aa6c130987e18279c107d0349469f7aa0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab53d3994a2e8d3a6c9b2cadac305532d"><td class="memItemLeft" align="right" valign="top"><a id="ab53d3994a2e8d3a6c9b2cadac305532d"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>updateTimeOfLastSound</b> (int16_t *data, int len)</td></tr>
+<tr class="separator:ab53d3994a2e8d3a6c9b2cadac305532d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
 <tr class="memitem:aef74dfcfa307d8e583c2893c8d9e694e"><td class="memItemLeft" align="right" valign="top"><a id="aef74dfcfa307d8e583c2893c8d9e694e"></a>
-<a class="el" href="classaudio__tools_1_1SIDStreamConfig.html">SIDStreamConfig</a>&#160;</td><td class="memItemRight" valign="bottom"><b>cfg</b></td></tr>
+<a class="el" href="structaudio__tools_1_1SIDStreamConfig.html">SIDStreamConfig</a>&#160;</td><td class="memItemRight" valign="bottom"><b>cfg</b></td></tr>
 <tr class="separator:aef74dfcfa307d8e583c2893c8d9e694e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab9ce104a07c45571806e32a2859ea362"><td class="memItemLeft" align="right" valign="top"><a id="ab9ce104a07c45571806e32a2859ea362"></a>
+<a class="el" href="structaudio__tools_1_1SIDMetadata.html">SIDMetadata</a>&#160;</td><td class="memItemRight" valign="bottom"><b>meta</b></td></tr>
+<tr class="separator:ab9ce104a07c45571806e32a2859ea362"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9203f417f2b365dc05c1c9b0e8e8084f"><td class="memItemLeft" align="right" valign="top"><a id="a9203f417f2b365dc05c1c9b0e8e8084f"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>active</b> = false</td></tr>
+<tr class="separator:a9203f417f2b365dc05c1c9b0e8e8084f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac46c077c2ef0f0bdd7d13063be522524"><td class="memItemLeft" align="right" valign="top"><a id="ac46c077c2ef0f0bdd7d13063be522524"></a>
+uint64_t&#160;</td><td class="memItemRight" valign="bottom"><b>time_of_last_sound</b> = 0</td></tr>
+<tr class="separator:ac46c077c2ef0f0bdd7d13063be522524"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Provides SID audio data. </p>
 <dl class="section author"><dt>Author</dt><dd>Gunnar Larsen </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GPLv3 </dd></dl>
-</div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="a9d6816083846081449ca0c6622313af2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9d6816083846081449ca0c6622313af2">&#9670;&nbsp;</a></span>loadTune()</h2>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="ac6d77b143462480994f74939b6b755c6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac6d77b143462480994f74939b6b755c6">&#9670;&nbsp;</a></span>SIDStream()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -134,7 +160,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void audio_tools::SIDStream::loadTune </td>
+          <td class="memname">audio_tools::SIDStream::SIDStream </td>
           <td>(</td>
           <td class="paramtype">const unsigned char *&#160;</td>
           <td class="paramname"><em>tunedata</em>, </td>
@@ -164,13 +190,92 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Loads the tune to be played. </p>
+<p>Construct a new <a class="el" href="classaudio__tools_1_1SIDStream.html" title="Provides SID audio data.">SIDStream</a> object To play a song just call begin() </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">tunedata</td><td></td></tr>
     <tr><td class="paramname">tunedatalen</td><td></td></tr>
-    <tr><td class="paramname">subtune</td><td><br  />
- </td></tr>
+    <tr><td class="paramname">subtune</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="aa4bc95f1efd9cc2e747fd7177317e9c4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa4bc95f1efd9cc2e747fd7177317e9c4">&#9670;&nbsp;</a></span>isActive()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool audio_tools::SIDStream::isActive </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>timeoutMs</em> = <code>2000</code></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Detects if we still produce any sound: Some submodule play endlessly, others only for a short period of time This method can detect the ones that have ended and produce 0 as output. Warning: you need to call readBytes while using this method. </p>
+
+</div>
+</div>
+<a id="a20bc3207c71009ebead019f8bdd3b731"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a20bc3207c71009ebead019f8bdd3b731">&#9670;&nbsp;</a></span>setSID()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void audio_tools::SIDStream::setSID </td>
+          <td>(</td>
+          <td class="paramtype">const unsigned char *&#160;</td>
+          <td class="paramname"><em>tunedata</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>tunedatalen</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>subtune</em> = <code>0</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Loads the tune to be played and starts generating audio. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">tunedata</td><td></td></tr>
+    <tr><td class="paramname">tunedatalen</td><td></td></tr>
+    <tr><td class="paramname">subtune</td><td></td></tr>
   </table>
   </dd>
 </dl>
