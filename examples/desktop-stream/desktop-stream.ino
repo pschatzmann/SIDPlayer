@@ -10,35 +10,37 @@
  */
 #include "AudioTools.h"
 #include "SIDStream.h"
-#include "AudioLibs/AudioKit.h"
+#include "AudioLibs/StdioStream.h"
 #include "audio/commando.h" 
 
 uint16_t sample_rate=32000;
 uint8_t channels = 2; 
-AudioKitStream out; 
+StdioStream out; 
+WAVEncoder enc;
+EncodedAudioStream wav(&out, &enc); // final solution
 SIDStream sid(music_Commando_sid, music_Commando_sid_len);
-StreamCopy copier(out, sid); 
+StreamCopy copier(wav, sid); 
 
 // Arduino Setup
 void setup(void) {  
   // Open Serial 
   Serial.begin(115200);
-  AudioLogger::instance().begin(Serial, AudioLogger::Info);
+  AudioLogger::instance().begin(Serial, AudioLogger::Error);
 
-  // start I2S
-  Serial.println("starting I2S...");
-  auto config = out.defaultConfig(TX_MODE);
+  // start output
+  auto config = out.defaultConfig();
   config.sample_rate = sample_rate; 
   config.channels = channels;
   config.bits_per_sample = 16;
   out.begin(config);
+  wav.begin(config);
 
   // Setup SID
   auto scfg = sid.defaultConfig();
   scfg.copyFrom(config);
+  scfg.subtune = 2;
   sid.begin(scfg);
   //sid.setSID(music_Commando_sid, music_Commando_sid_len);
-
 }
 
 // Arduino loop - copy sound to out 

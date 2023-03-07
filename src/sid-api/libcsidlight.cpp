@@ -78,7 +78,7 @@ byte *filedata;             // pointer to incoming psid data
 
 byte timermode[0x20], SIDtitle[0x20], SIDauthor[0x20], SIDinfo[0x20];
 
-int subtune = 0, tunelength = -1, default_tunelength = 300, minutes = -1, seconds = -1;
+int subtune = 0, subtune_amount = 0, tunelength = -1, default_tunelength = 300, minutes = -1, seconds = -1;
 unsigned int initaddr, playaddr, playaddf, SID_address[3] = {0xD400, 0, 0};
 int samplerate = DEFAULT_SAMPLERATE;
 float framecnt = 0, frame_sampleperiod = DEFAULT_SAMPLERATE / PAL_FRAMERATE;
@@ -1267,6 +1267,15 @@ const char *libcsid_gettitle()
   return (char *)&SIDtitle;
 }
 
+int libcsid_getsubtune_amount(){
+  return subtune_amount;
+}
+
+int libcsid_getsubtune(){
+  return subtune;
+}
+
+
 void libcsid_init(int _samplerate, int _sidmodel)
 {
 #if MEMORY_ALLOCATION_LOGIC==1
@@ -1301,9 +1310,9 @@ void libcsid_free(){
 
 int libcsid_load(unsigned char *_buffer, int _bufferlen, int _subtune)
 {
-  int readata, strend, subtune_amount, preferred_SID_model[3] = {8580, 8580, 8580};
+  int readata, strend, preferred_SID_model[3] = {8580, 8580, 8580};
   unsigned int i, datalen, offs, loadaddr;
-
+  subtune_amount = 0;
   subtune = _subtune;
 
   unsigned char *filedata = _buffer;
