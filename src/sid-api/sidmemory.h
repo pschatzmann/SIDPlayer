@@ -31,7 +31,7 @@ public:
     uint8_t *tmp = dynamic_data[dyn_idx];
     if (tmp == 0) {
       tmp = dynamic_data[dyn_idx] = (uint8_t *)calloc(1, 256);
-      fprintf(stderr, "Allocate: 0x%x\n", idx);
+      fprintf(stderr, "Allocate: 0x%04x\n", idx);
     }
     return tmp[dyn_offset];
   }
@@ -48,7 +48,6 @@ public:
   }
 
 protected:
-  uint8_t zero = 0;
   int start;
   int offset;
   int len;
