@@ -10,7 +10,7 @@ include(FetchContent)
 option(BUILD_SHARED_LIBS "Build using shared libraries" OFF)
 
 
-# Build with arduino-audio-tools
+# Build with sidplayer
 if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
     add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../.. ${CMAKE_CURRENT_BINARY_DIR}/sidplayer )
 endif()
