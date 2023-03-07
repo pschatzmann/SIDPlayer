@@ -6,7 +6,7 @@ project(sidplayer)
 # lots of warnings and all warnings as errors
 # add_compile_options(-Wall -Wextra )
 
-set(CMAKE_CXX_STANDARD 17)
+set (CMAKE_CXX_STANDARD 17)
 set (CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG}")
 set (CMAKE_LINKER_FLAGS_DEBUG "${CMAKE_LINKER_FLAGS_DEBUG}")
 include(FetchContent)
@@ -14,6 +14,8 @@ include(FetchContent)
 
 # Build with Audio Tool
 set (ADD_STD_LIB OFF CACHE INTERNAL  "Turn off extended libs")
+set (ADD_PORTAUDIO OFF CACHE INTERNAL  "Portraudio lib")
+set (ADD_ARDUINO_EMULATOR OFF CACHE INTERNAL  "Arduino Emulator lib")
 FetchContent_Declare(arduino-audio-tools GIT_REPOSITORY "https://github.com/pschatzmann/arduino-audio-tools.git" GIT_TAG main )
 FetchContent_GetProperties(arduino-audio-tools)
 if(NOT arduino-audio-tools_POPULATED)
