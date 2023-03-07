@@ -89,6 +89,10 @@ public:
       config.tune_data = cfg.tune_data;
       config.tune_data_length = cfg.tune_data_length;
     }
+    // Use subtune from constructor if not reqeusted by begin
+    if (config.subtune==0 && cfg.subtune!=0){
+      config.subtune = cfg.subtune;
+    }
     this->cfg = config;
 
     // allocate memory and setup processing
