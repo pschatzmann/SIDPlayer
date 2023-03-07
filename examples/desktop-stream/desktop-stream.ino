@@ -23,9 +23,7 @@ StreamCopy copier(wav, sid);
 
 // Arduino Setup
 void setup(void) {  
-  // Open Serial 
-  Serial.begin(115200);
-  AudioLogger::instance().begin(Serial, AudioLogger::Error);
+  AudioLogger::instance().begin(Serial, AudioLogger::Warning);
 
   // start output
   auto config = out.defaultConfig();
@@ -46,4 +44,9 @@ void setup(void) {
 // Arduino loop - copy sound to out 
 void loop() {
   copier.copy();
+}
+
+int main(){
+  setup();
+  while(true)loop();
 }

@@ -11,7 +11,9 @@ set (CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG}")
 set (CMAKE_LINKER_FLAGS_DEBUG "${CMAKE_LINKER_FLAGS_DEBUG}")
 include(FetchContent)
 
+
 # Build with Audio Tool
+set (ADD_STD_LIB OFF CACHE INTERNAL  "Turn off extended libs")
 FetchContent_Declare(arduino-audio-tools GIT_REPOSITORY "https://github.com/pschatzmann/arduino-audio-tools.git" GIT_TAG main )
 FetchContent_GetProperties(arduino-audio-tools)
 if(NOT arduino-audio-tools_POPULATED)
@@ -21,12 +23,12 @@ endif()
 
 # define source files
 file(GLOB_RECURSE SRC_LIST_CPP CONFIGURE_DEPENDS  "${PROJECT_SOURCE_DIR}/src/*.cpp" )
-file(GLOB_RECURSE SRC_LIST_C CONFIGURE_DEPENDS  "${PROJECT_SOURCE_DIR}/src/*.c" )
 
 # define libraries
-add_library (sidplayer STATIC ${SRC_LIST_CPP} ${SRC_LIST_C})
+add_library (sidplayer STATIC ${SRC_LIST_CPP})
 
-target_compile_definitions(sidplayer PUBLIC -DIS_DESKTOP )
+target_compile_definitions(sidplayer PUBLIC -DIS_DESKTOP_WITH_TIME_ONLY -DEXIT_ON_STOP )
+target_compile_definitions(arduino-audio-tools INTERFACE -DIS_DESKTOP_WITH_TIME_ONLY -DEXIT_ON_STOP)
 
 # define location for header files
 target_include_directories(sidplayer PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/src )

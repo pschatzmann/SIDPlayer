@@ -1,5 +1,5 @@
 #pragma once
-#ifndef IS_DESKTOP
+#ifdef ARDUINO
 #include "SD.h"
 #endif
 #include <stddef.h>
@@ -108,7 +108,7 @@ public:
   virtual size_t size() = 0;
 };
 
-#ifndef IS_DESKTOP
+#ifdef ARDUINO
 
 /**
  * @brief Provides the size if the audio source is using Files

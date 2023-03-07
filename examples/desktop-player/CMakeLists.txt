@@ -20,9 +20,7 @@ set_source_files_properties(desktop-player.ino PROPERTIES LANGUAGE CXX)
 add_executable (desktop-player desktop-player.ino)
 
 # set preprocessor defines
-target_compile_definitions(arduino_emulator PUBLIC -DDEFINE_MAIN)
-target_compile_definitions(desktop-player PUBLIC -DARDUINO -DIS_DESKTOP -DEXIT_ON_STOP)
-target_compile_definitions(sidplayer PUBLIC -DARDUINO -DIS_DESKTOP -DEXIT_ON_STOP)
+target_compile_definitions(desktop-player PUBLIC -DEXIT_ON_STOP -DIS_DESKTOP_WITH_TIME_ONLY)
 
 # specify libraries
-target_link_libraries(desktop-player sidplayer arduino_emulator arduino-audio-tools)
+target_link_libraries(desktop-player sidplayer arduino-audio-tools)

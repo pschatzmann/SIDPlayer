@@ -24,13 +24,12 @@ SIDSizeSource sidSize(source);
 StdioStream out; // or AnalogAudioStream or PWMStream etc
 WAVEncoder enc;
 EncodedAudioStream wav(&out, &enc); // final solution
-CsvStream<int16_t> csv(Serial);     // best for checking the audio generation
-NullStream none;                    // best for debuging
+//CsvStream<int16_t> csv(Serial);     // best for checking the audio generation
+//NullStream none;                    // best for debuging
 SIDPlayer sid(source, wav, sidSize);  // change relevant output
 
 void setup() {
-  Serial.begin(115200);
-  AudioLogger::instance().begin(Serial, AudioLogger::Error);
+  AudioLogger::instance().begin(Serial, AudioLogger::Warning);
 
   auto cfg = out.defaultConfig();
   cfg.sample_rate = 8000;
@@ -40,8 +39,8 @@ void setup() {
   // actually only the output that is used is relevant
   out.begin(cfg);
   wav.begin(cfg);
-  csv.begin(cfg);
-  none.begin(cfg);
+//  csv.begin(cfg);
+//  none.begin(cfg);
 
   // move to next song after playing for 5 minuts
   sid.setTimeout(60*1);
@@ -51,5 +50,10 @@ void setup() {
 
 void loop() {
   sid.copy();
-
 }
+
+int main(){
+  setup();
+  while(true)loop();
+}
+
