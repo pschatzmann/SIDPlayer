@@ -2,6 +2,7 @@
  * @file player-desktop.ino
  * @author Phil Schatzmann
  * @brief Sends the PCM stream of the the included demo SID files to the the standard output. 
+ * 
  * You can compile and run this sketch on the desktop e.g. with player-desktop | aplay on linux 
  * To build it:
  * go to this directory
@@ -9,7 +10,8 @@
  * cd build
  * cmake ..
  * make
- * and execute it with ./player-desktop
+ * and execute it with ./desktop-player
+ * 
  * @version 0.1
  * @date 2023-03-02
  * 

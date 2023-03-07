@@ -2,6 +2,16 @@
  * @file stream.ino
  * @author Phil Schatzmann
  * @brief  Copies the Audio from Sid to an output device
+ *
+ * You can compile and run this sketch on the desktop e.g. with player-desktop | aplay on linux 
+ * To build it:
+ * go to this directory
+ * mkdir build
+ * cd build
+ * cmake ..
+ * make
+ * and execute it with ./desktop-stream
+
  * @version 0.1
  * @date 2023-03-03
  * 
