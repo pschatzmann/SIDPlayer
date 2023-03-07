@@ -187,8 +187,11 @@ protected:
       LOGE("Song is too big!");
       next(1);
     }
-    // release memory again
-    sid_data.resize(0);
+
+    if (MEMORY_ALLOCATION_LOGIC!=4){
+      // release memory again
+      sid_data.resize(0);
+    }
   }
 
   /// calculates when the song expires
