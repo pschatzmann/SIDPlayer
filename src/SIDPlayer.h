@@ -188,7 +188,7 @@ protected:
     p_stream->readBytes(sid_data.data(), size);
     LOGI("setSID size: %d", size);
     if (size<MAX_FILE_SIZE){
-      sid.setSID(sid_data.data(), size);
+      sid.setSID(sid_data.data(), size, 0);
       state = Playing;
     } else {
       LOGE("Song is too big!");
