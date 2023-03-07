@@ -3,7 +3,7 @@
  * @author Phil Schatzmann
  * @brief Sends the PCM stream of the the included demo SID files to the the standard output. 
  * 
- * You can compile and run this sketch on the desktop e.g. with player-desktop | aplay on linux 
+ * You can compile and run this sketch on the desktop e.g. with desktop-player | aplay on linux 
  * To build it:
  * go to this directory
  * mkdir build
