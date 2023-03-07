@@ -160,7 +160,8 @@ public:
   SIDMetadata getMetadata() { return meta; }
 
   /// Detects if we still produce any sound: Some submodule play endlessly, others only for a short period of time
-  /// This method can detect the ones that have ended and produce 0 as output.
+  /// This method can detect the ones that have ended and produce 0 as output. Warning: you need to call readBytes
+  /// while using this method.
   bool isActive(int timeoutMs=2000) {
     return active && (time_of_last_sound > millis() - timeoutMs);
   }
