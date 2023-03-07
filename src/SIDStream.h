@@ -39,11 +39,15 @@ struct SIDMetadata {
   char title[32] = {0};
   char author[32] = {0};
   char sid_info[32] = {0};
+  uint8_t total_tunes;
+  uint8_t default_tune;
 
   void logInfo() {
     LOGI("SID Title: %s", title);
     LOGI("SID Author: %s", author);
-    LOGI("SID Info: %s", libcsid_getinfo());
+    LOGI("SID Info: %s", sid_info);
+    LOGI("SID Number of tunes: %d", total_tunes);
+    LOGI("SID Default tune: %d", default_tune);
   }
 };
 
@@ -91,7 +95,7 @@ public:
     // allocate memory and setup processing
     libcsid_init(cfg.sample_rate, cfg.sid_model);
 
-    // start to play song
+    // start to play default song
     if (cfg.tune_data != nullptr) {
       setSID(cfg.tune_data, cfg.tune_data_length, cfg.subtune);
     } else {
@@ -116,16 +120,26 @@ public:
     // update tune in cfg
     cfg.tune_data = tunedata;
     cfg.tune_data_length = tunedatalen;
-    cfg.subtune = subtune;
 
     // load song
-    libcsid_load((unsigned char *)tunedata, tunedatalen, subtune);
+    libcsid_load((unsigned char *)tunedata, tunedatalen);
 
     // save metadata
     memcpy(meta.author, libcsid_getauthor(), sizeof(meta.author));
     memcpy(meta.title, libcsid_gettitle(), sizeof(meta.author));
     memcpy(meta.sid_info, libcsid_getinfo(), sizeof(meta.sid_info));
+    meta.total_tunes = libcsid_get_total_tunes_number();
+    meta.default_tune = libcsid_get_default_tune_number();
+    setTune(subtune);
+  }
+
+  void setTune(int subtune = 0) {
+    if (!active)
+      return;
+
+    cfg.subtune = subtune;
     meta.logInfo();
+    libcsid_play(cfg.subtune);
   }
 
   /// fill the data with 2 channels
@@ -147,6 +161,7 @@ public:
 
   /// @brief Provide the metadata for the sid
   SIDMetadata getMetadata() { return meta; }
+  SIDStreamConfig getStreamConfigdata() { return cfg; }
 
 protected:
   SIDStreamConfig cfg;

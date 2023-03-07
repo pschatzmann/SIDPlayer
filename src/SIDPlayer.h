@@ -88,6 +88,14 @@ public:
     return player.next(offset);
   }
 
+  /// moves to next tune
+  bool nextTune(int offset = 1) {
+    int tune =sid.getStreamConfigdata().subtune;
+    tune = (++tune) % sid.getMetadata().total_tunes;
+    sid.setTune(tune);
+    return true;
+  }
+
   /// moves to selected file
   bool setIndex(int idx) {
     state = Initial;
@@ -180,7 +188,7 @@ protected:
     p_stream->readBytes(sid_data.data(), size);
     LOGI("setSID size: %d", size);
     if (size<MAX_FILE_SIZE){
-      sid.setSID(sid_data.data(), size, 0);
+      sid.setSID(sid_data.data(), size);
       state = Playing;
     } else {
       LOGE("Song is too big!");
