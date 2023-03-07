@@ -88,7 +88,6 @@ public:
     if (config.tune_data == nullptr && cfg.tune_data != nullptr) {
       config.tune_data = cfg.tune_data;
       config.tune_data_length = cfg.tune_data_length;
-      config.subtune = cfg.subtune;
     }
     this->cfg = config;
 
@@ -151,16 +150,26 @@ public:
         result += 2;
       }
     }
+
+    updateTimeOfLastSound((int16_t*)buffer, bytes/2);
+    
     return result;
   }
 
-  /// @brief Provide the metadata for the sid
+  /// Provide the metadata for the sid
   SIDMetadata getMetadata() { return meta; }
+
+  /// Detects if we still produce any sound: Some submodule play endlessly, others only for a short period of time
+  /// This method can detect the ones that have ended and produce 0 as output.
+  bool isActive(int timeoutMs=2000) {
+    return active && (time_of_last_sound > millis() - timeoutMs);
+  }
 
 protected:
   SIDStreamConfig cfg;
   SIDMetadata meta;
   bool active = false;
+  uint64_t time_of_last_sound = 0;
 
   /// Provides a single sample
   int16_t readSample() {
@@ -170,6 +179,16 @@ protected:
 
     return ((int16_t)result);
   }
+
+  void updateTimeOfLastSound(int16_t *data, int len){
+    for (int j=0;j<len;j++){
+      if (data[j]!=0){
+        time_of_last_sound = millis();
+        break;
+      }
+    }
+  }
+
 };
 
 } // namespace audio_tools
