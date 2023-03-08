@@ -89,6 +89,14 @@ public:
     return player.next(offset);
   }
 
+  /// moves to next tune
+  bool nextTune(int offset = 1) {
+    int tune =sid.getStreamConfigdata().subtune;
+    tune = (++tune) % sid.getMetadata().total_tunes;
+    sid.setTune(tune);
+    return true;
+  }
+
   /// moves to selected file
   bool setIndex(int idx) {
     state = Initial;

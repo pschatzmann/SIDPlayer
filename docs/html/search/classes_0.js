@@ -7,6 +7,5 @@ var searchData=
   ['sidstream_45',['SIDStream',['../classaudio__tools_1_1SIDStream.html',1,'audio_tools']]],
   ['sidstreamconfig_46',['SIDStreamConfig',['../structaudio__tools_1_1SIDStreamConfig.html',1,'audio_tools']]],
   ['sidtitle_47',['SidTitle',['../structaudio__tools_1_1SidTitle.html',1,'audio_tools']]],
-  ['sizesource_48',['SizeSource',['../classaudio__tools_1_1SizeSource.html',1,'audio_tools']]],
-  ['sizesourcefile_49',['SizeSourceFile',['../classaudio__tools_1_1SizeSourceFile.html',1,'audio_tools']]]
+  ['sizesource_48',['SizeSource',['../classaudio__tools_1_1SizeSource.html',1,'audio_tools']]]
 ];

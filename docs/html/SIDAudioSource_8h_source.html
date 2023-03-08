@@ -70,7 +70,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 <div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#pragma once</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#ifndef IS_DESKTOP</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#ifdef ARDUINO</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &quot;SD.h&quot;</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;stddef.h&gt;</span></div>
@@ -93,7 +93,7 @@ $(function() {
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="keyword">const</span> <a class="code" href="structaudio__tools_1_1SidTitle.html">SidTitle</a> DemoSongs[] = {</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    {(uint8_t *)music_Commando_sid, music_Commando_sid_len, 0},</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    {(uint8_t *)Yie_Ar_Kung_Fu_sid, Yie_Ar_Kung_Fu_sid_len, 0},</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    {(uint8_t *)Yie_Ar_Kung_Fu_sid, Yie_Ar_Kung_Fu_sid_len, 18},</div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    {(uint8_t *)Mikie_sid, Mikie_sid_len, 0},</div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    {(uint8_t *)Ocean_Loader_2_sid, Ocean_Loader_2_sid_len, 0},</div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    {(uint8_t *)International_Karate_sid, International_Karate_sid_len, 0},</div>
@@ -157,11 +157,11 @@ $(function() {
 <div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;  <span class="keyword">virtual</span> <span class="keywordtype">size_t</span> size() = 0;</div>
 <div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;};</div>
 <div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160; </div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;<span class="preprocessor">#ifndef IS_DESKTOP</span></div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;<span class="preprocessor">#ifdef ARDUINO</span></div>
 <div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160; </div>
-<div class="line"><a name="l00118"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1SizeSourceFile.html">  118</a></span>&#160;<span class="keyword">class </span><a class="code" href="classaudio__tools_1_1SizeSourceFile.html">SizeSourceFile</a> : <span class="keyword">public</span> <a class="code" href="classaudio__tools_1_1SizeSource.html">SizeSource</a> {</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;<span class="keyword">class </span>SizeSourceFile : <span class="keyword">public</span> <a class="code" href="classaudio__tools_1_1SizeSource.html">SizeSource</a> {</div>
 <div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;  <a class="code" href="classaudio__tools_1_1SizeSourceFile.html">SizeSourceFile</a>(AudioSource &amp;source) { p_source = &amp;source; }</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;  SizeSourceFile(AudioSource &amp;source) { p_source = &amp;source; }</div>
 <div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;  <span class="keywordtype">size_t</span> size()<span class="keyword"> override </span>{</div>
 <div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;    <span class="comment">// get the current stream (which is actually a file)</span></div>
 <div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;    File *p_file = (File *)p_source-&gt;nextStream(0);</div>
@@ -193,7 +193,6 @@ $(function() {
 <div class="ttc" id="aclassaudio__tools_1_1SIDAudioSource_html_ad904dc16f447e32fcd65b02e5101d147"><div class="ttname"><a href="classaudio__tools_1_1SIDAudioSource.html#ad904dc16f447e32fcd65b02e5101d147">audio_tools::SIDAudioSource::begin</a></div><div class="ttdeci">virtual void begin()</div><div class="ttdoc">Reset actual stream and move to root.</div><div class="ttdef"><b>Definition:</b> SIDAudioSource.h:55</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1SIDAudioSource_html_ad960e0dd3b54c3da4c8f297c317a7daf"><div class="ttname"><a href="classaudio__tools_1_1SIDAudioSource.html#ad960e0dd3b54c3da4c8f297c317a7daf">audio_tools::SIDAudioSource::size</a></div><div class="ttdeci">int size()</div><div class="ttdoc">File size of actual file.</div><div class="ttdef"><b>Definition:</b> SIDAudioSource.h:86</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1SIDSizeSource_html"><div class="ttname"><a href="classaudio__tools_1_1SIDSizeSource.html">audio_tools::SIDSizeSource</a></div><div class="ttdoc">Provides the size of the current file for a SIDAudioSource.</div><div class="ttdef"><b>Definition:</b> SIDAudioSource.h:138</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1SizeSourceFile_html"><div class="ttname"><a href="classaudio__tools_1_1SizeSourceFile.html">audio_tools::SizeSourceFile</a></div><div class="ttdoc">Provides the size if the audio source is using Files.</div><div class="ttdef"><b>Definition:</b> SIDAudioSource.h:118</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1SizeSource_html"><div class="ttname"><a href="classaudio__tools_1_1SizeSource.html">audio_tools::SizeSource</a></div><div class="ttdoc">Logic to determine the Size of the Stream: File ?</div><div class="ttdef"><b>Definition:</b> SIDAudioSource.h:106</div></div>
 <div class="ttc" id="astructaudio__tools_1_1SidTitle_html"><div class="ttname"><a href="structaudio__tools_1_1SidTitle.html">audio_tools::SidTitle</a></div><div class="ttdoc">Information about an individual SID song title.</div><div class="ttdef"><b>Definition:</b> SIDAudioSource.h:22</div></div>
 </div><!-- fragment --></div><!-- contents -->
