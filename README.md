@@ -10,6 +10,13 @@ Unfortunately we can not feed SID files incrementally to a codec, so this does n
 
 Therefore this project provides a separate, dedicated __SID stream__ and a __SID player__ that can play SID from files or from in memory hex dumps __on Arduino__. The player is based on the AudioPlayer from the [Arduino Audio Tools](https://github.com/pschatzmann/arduino-audio-tools), so you can use __different audio sources and audio sinks__. The SID emulation is based on cSID light by Hermit (Mihaly Horvath), (Year 2017).
 
+
+### Memory Requirements
+
+You can set the RAM implementation in the config file (SIDConfig.h): In most cases it is using __64KB fixed__. By default this memory is reserved statically. You can also select to use PSRAM instead of RAM.
+There is also an experimenal memory implementation that can directly use the song stored in PROGMEM and just needs around 2K of additinal RAM.
+
+
 ### Documentation
 
 - [Class Documentation](https://pschatzmann.github.io/SIDPlayer/docs/html/annotated.html)
