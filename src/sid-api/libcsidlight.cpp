@@ -1290,6 +1290,9 @@ void libcsid_init(int _samplerate, int _sidmodel)
 #elif MEMORY_ALLOCATION_LOGIC==3
   //memory = (byte *)malloc(MAX_DATA_LEN);
   memset(memory, 0, MAX_DATA_LEN);
+#elif MEMORY_ALLOCATION_LOGIC==4
+  // mapped memory
+  SIDMemory memory;  // represents the memory map of the virtual C64 environment
 #endif
   samplerate = _samplerate;
   sampleratio = round(C64_PAL_CPUCLK / samplerate);
