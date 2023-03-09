@@ -30,7 +30,7 @@ For Arduino you can download the library as zip and call include Library -> zip 
 
 ```
 cd  ~/Documents/Arduino/libraries
-git clone pschatzmann/SIDPlayer.git
+git clone https://github.com/pschatzmann/SIDPlayer.git
 ```
 
 And please do not forget to also install the [AudioTools](https://github.com/pschatzmann/arduino-audio-tools)!
