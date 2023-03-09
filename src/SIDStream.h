@@ -84,6 +84,11 @@ public:
   }
 
   bool begin(SIDStreamConfig config) {
+    TRACEI();
+    if (config.bits_per_sample!=16){
+      LOGE("bits_per_sample %d: must be 16", config.bits_per_sample);
+      return false;
+    }
     // save tune_data from constructor
     if (config.tune_data == nullptr && cfg.tune_data != nullptr) {
       config.tune_data = cfg.tune_data;
@@ -94,6 +99,7 @@ public:
       config.subtune = cfg.subtune;
     }
     this->cfg = config;
+    this->frame_size = sizeof(int16_t) * cfg.channels;
 
     // allocate memory and setup processing
     libcsid_init(cfg.sample_rate, cfg.sid_model);
@@ -110,6 +116,7 @@ public:
 
   /// @brief  Stops processing and releases the memory
   void end() override {
+    TRACEI();
     active = false;
     libcsid_free();
   }
@@ -119,6 +126,7 @@ public:
   /// @param tunedatalen
   /// @param subtune
   void setSID(const unsigned char *tunedata, int tunedatalen, int subtune = 0) {
+    LOGI("setSID len %d, subtune: %d", tunedatalen, subtune);
     active = true;
     // update tune in cfg
     cfg.tune_data = tunedata;
@@ -139,7 +147,7 @@ public:
   void setTune(int subtune = 0) {
     if (!active)
       return;
-
+    LOGI("setTune: %d", subtune);
     cfg.subtune = subtune;
     meta.logInfo();
     libcsid_play(cfg.subtune);
@@ -147,11 +155,21 @@ public:
 
   /// fill the data with 2 channels
   size_t readBytes(uint8_t *buffer, size_t bytes) override {
+    // return when not active
     if (!active)
       return 0;
+
+    // check for acceptable size
+    if (bytes<frame_size){
+      LOGE("readBytes: %d - too small", bytes);
+      return 0;
+    }
+
+    // request is valid
+    LOGD("readBytes %d", bytes);
     size_t result = 0;
     int16_t *ptr = (int16_t *)buffer;
-    int frames = bytes / sizeof(int16_t) / cfg.channels;
+    int frames = bytes / frame_size;
     for (int j = 0; j < frames; j++) {
       int16_t sample = readSample();
       for (int i = 0; i < cfg.channels; i++) {
@@ -161,7 +179,6 @@ public:
     }
 
     updateTimeOfLastSound((int16_t*)buffer, bytes/2);
-    
     return result;
   }
 
@@ -180,6 +197,7 @@ protected:
   SIDStreamConfig cfg;
   SIDMetadata meta;
   bool active = false;
+  uint8_t frame_size;
   uint64_t time_of_last_sound = 0;
 
   /// Provides a single sample
