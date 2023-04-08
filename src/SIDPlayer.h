@@ -13,7 +13,7 @@ namespace audio_tools {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class SIDPlayer : public AudioBaseInfoDependent {
+class SIDPlayer : public AudioInfoDependent {
 public:
   SIDPlayer(AudioSource &source, AudioPrint &output, SizeSource &sizeSource) {
     static CodecNOP nop;
@@ -63,12 +63,12 @@ public:
   }
 
   /// Updates the audio info in the related objects
-  void setAudioInfo(AudioBaseInfo info) override {
+  void setAudioInfo(AudioInfo info) override {
     TRACED();
     this->info = info;
   };
 
-  AudioBaseInfo audioInfo() override { return info; }
+  AudioInfo audioInfo() override { return info; }
 
   /// starts / resumes the playing of a matching song
   void play() { player.play(); }
@@ -169,8 +169,8 @@ protected:
   AudioPlayer player;
   SIDStream sid;
   Print *p_out;
-  AudioBaseInfoDependent *p_info;
-  AudioBaseInfo info;
+  AudioInfoDependent *p_info;
+  AudioInfo info;
   Vector<uint8_t> sid_data{0};
   SizeSource *p_size_source = nullptr;
   enum proces_state_enum { Initial, Playing };

@@ -17,7 +17,7 @@ namespace audio_tools {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-struct SIDStreamConfig : public AudioBaseInfo {
+struct SIDStreamConfig : public AudioInfo {
   SIDStreamConfig() {
     sample_rate = 22050;
     channels = 2;

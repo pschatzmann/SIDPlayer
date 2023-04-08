@@ -77,7 +77,7 @@ $(function() {
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="keyword">namespace </span>audio_tools {</div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
-<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1SIDPlayer.html">   16</a></span>&#160;<span class="keyword">class </span><a class="code" href="classaudio__tools_1_1SIDPlayer.html">SIDPlayer</a> : <span class="keyword">public</span> AudioBaseInfoDependent {</div>
+<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1SIDPlayer.html">   16</a></span>&#160;<span class="keyword">class </span><a class="code" href="classaudio__tools_1_1SIDPlayer.html">SIDPlayer</a> : <span class="keyword">public</span> AudioInfoDependent {</div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="keyword">public</span>:</div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;  <a class="code" href="classaudio__tools_1_1SIDPlayer.html">SIDPlayer</a>(AudioSource &amp;source, AudioPrint &amp;output, <a class="code" href="classaudio__tools_1_1SizeSource.html">SizeSource</a> &amp;sizeSource) {</div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <span class="keyword">static</span> CodecNOP nop;</div>
@@ -124,12 +124,12 @@ $(function() {
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    sid.<a class="code" href="classaudio__tools_1_1SIDStream.html#a48475be554617c8e02d47a72fd76245b">end</a>();</div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;  }</div>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
-<div class="line"><a name="l00066"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1SIDPlayer.html#a060d48f78682add19a3d69f61a81a588">   66</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1SIDPlayer.html#a060d48f78682add19a3d69f61a81a588">setAudioInfo</a>(AudioBaseInfo info)<span class="keyword"> override </span>{</div>
+<div class="line"><a name="l00066"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1SIDPlayer.html#a060d48f78682add19a3d69f61a81a588">   66</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1SIDPlayer.html#a060d48f78682add19a3d69f61a81a588">setAudioInfo</a>(AudioInfo info)<span class="keyword"> override </span>{</div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    TRACED();</div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    this-&gt;info = info;</div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;  };</div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;  AudioBaseInfo audioInfo()<span class="keyword"> override </span>{ <span class="keywordflow">return</span> info; }</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;  AudioInfo audioInfo()<span class="keyword"> override </span>{ <span class="keywordflow">return</span> info; }</div>
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160; </div>
 <div class="line"><a name="l00074"></a><span class="lineno"><a class="line" href="classaudio__tools_1_1SIDPlayer.html#a78714f60e4098e46b04e947cc21a27b3">   74</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classaudio__tools_1_1SIDPlayer.html#a78714f60e4098e46b04e947cc21a27b3">play</a>() { player.play(); }</div>
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
@@ -210,8 +210,8 @@ $(function() {
 <div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;  AudioPlayer player;</div>
 <div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;  <a class="code" href="classaudio__tools_1_1SIDStream.html">SIDStream</a> sid;</div>
 <div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;  Print *p_out;</div>
-<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;  AudioBaseInfoDependent *p_info;</div>
-<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;  AudioBaseInfo info;</div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;  AudioInfoDependent *p_info;</div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;  AudioInfo info;</div>
 <div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;  Vector&lt;uint8_t&gt; sid_data{0};</div>
 <div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;  SizeSource *p_size_source = <span class="keyword">nullptr</span>;</div>
 <div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;  <span class="keyword">enum</span> proces_state_enum { Initial, Playing };</div>
@@ -269,7 +269,7 @@ $(function() {
 <div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;} <span class="comment">// namespace audio_tools</span></div>
 <div class="ttc" id="aclassaudio__tools_1_1SIDPlayer_html"><div class="ttname"><a href="classaudio__tools_1_1SIDPlayer.html">audio_tools::SIDPlayer</a></div><div class="ttdoc">SID player which is based on the AudioPlayer from the AudioTools project and the SidPlayer provided b...</div><div class="ttdef"><b>Definition:</b> SIDPlayer.h:16</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1SIDPlayer_html_a038a0092297dbb9cb68f225faca65a33"><div class="ttname"><a href="classaudio__tools_1_1SIDPlayer.html#a038a0092297dbb9cb68f225faca65a33">audio_tools::SIDPlayer::setVolume</a></div><div class="ttdeci">void setVolume(float volume)</div><div class="ttdoc">sets the volume - values need to be between 0.0 and 1.0</div><div class="ttdef"><b>Definition:</b> SIDPlayer.h:125</div></div>
-<div class="ttc" id="aclassaudio__tools_1_1SIDPlayer_html_a060d48f78682add19a3d69f61a81a588"><div class="ttname"><a href="classaudio__tools_1_1SIDPlayer.html#a060d48f78682add19a3d69f61a81a588">audio_tools::SIDPlayer::setAudioInfo</a></div><div class="ttdeci">void setAudioInfo(AudioBaseInfo info) override</div><div class="ttdoc">Updates the audio info in the related objects.</div><div class="ttdef"><b>Definition:</b> SIDPlayer.h:66</div></div>
+<div class="ttc" id="aclassaudio__tools_1_1SIDPlayer_html_a060d48f78682add19a3d69f61a81a588"><div class="ttname"><a href="classaudio__tools_1_1SIDPlayer.html#a060d48f78682add19a3d69f61a81a588">audio_tools::SIDPlayer::setAudioInfo</a></div><div class="ttdeci">void setAudioInfo(AudioInfo info) override</div><div class="ttdoc">Updates the audio info in the related objects.</div><div class="ttdef"><b>Definition:</b> SIDPlayer.h:66</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1SIDPlayer_html_a0d5e03ff4c6445aab5e290764f9e0c13"><div class="ttname"><a href="classaudio__tools_1_1SIDPlayer.html#a0d5e03ff4c6445aab5e290764f9e0c13">audio_tools::SIDPlayer::setSIDAsInput</a></div><div class="ttdeci">void setSIDAsInput()</div><div class="ttdoc">Make sure that we copy the data from the sid stream to the output.</div><div class="ttdef"><b>Definition:</b> SIDPlayer.h:224</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1SIDPlayer_html_a175d54866865fcd720b26b11432a8cdf"><div class="ttname"><a href="classaudio__tools_1_1SIDPlayer.html#a175d54866865fcd720b26b11432a8cdf">audio_tools::SIDPlayer::volume</a></div><div class="ttdeci">float volume()</div><div class="ttdoc">Determines the actual volume.</div><div class="ttdef"><b>Definition:</b> SIDPlayer.h:128</div></div>
 <div class="ttc" id="aclassaudio__tools_1_1SIDPlayer_html_a228e56883939494c5fdb2d0047a11ed5"><div class="ttname"><a href="classaudio__tools_1_1SIDPlayer.html#a228e56883939494c5fdb2d0047a11ed5">audio_tools::SIDPlayer::isPlayingTimedOut</a></div><div class="ttdeci">bool isPlayingTimedOut()</div><div class="ttdoc">checks if the song has expired</div><div class="ttdef"><b>Definition:</b> SIDPlayer.h:213</div></div>
