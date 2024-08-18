@@ -13,9 +13,9 @@ namespace audio_tools {
  * @author Phil Schatzmann
  * @copyright GPLv3
  */
-class SIDPlayer : public AudioInfoDependent {
+class SIDPlayer : public AudioInfoSupport {
 public:
-  SIDPlayer(AudioSource &source, AudioPrint &output, SizeSource &sizeSource) {
+  SIDPlayer(AudioSource &source, AudioOutput &output, SizeSource &sizeSource) {
     static CodecNOP nop;
     p_size_source = &sizeSource;
     player.setAudioSource(source);
@@ -169,7 +169,7 @@ protected:
   AudioPlayer player;
   SIDStream sid;
   Print *p_out;
-  AudioInfoDependent *p_info;
+  AudioInfoSupport *p_info;
   AudioInfo info;
   Vector<uint8_t> sid_data{0};
   SizeSource *p_size_source = nullptr;

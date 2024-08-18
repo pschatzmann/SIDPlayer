@@ -94,7 +94,7 @@ public:
 protected:
   int index = 0;
   Vector<SidTitle> songs{0};
-  MemoryStream stream{nullptr,0,FLASH_RAM};
+  MemoryStream stream{nullptr,0,true, FLASH_RAM};
   size_t title_size = 0;
 };
 
