@@ -10,12 +10,12 @@
  */
 #include "AudioTools.h"
 #include "SIDStream.h"
-#include "AudioLibs/AudioKit.h"
+#include "AudioLibs/AudioBoardStream.h"
 #include "audio/commando.h" 
 
 uint16_t sample_rate=32000;
 uint8_t channels = 2; 
-AudioKitStream out; 
+AudioBoardStream out(AudioKitEs8388V1);
 SIDStream sid(music_Commando_sid, music_Commando_sid_len);
 StreamCopy copier(out, sid); 
 

@@ -14,11 +14,11 @@
  */
 
 #include "SIDPlayer.h"
-#include "AudioLibs/AudioKit.h"
+#include "AudioLibs/AudioBoardStream.h"
 
 SIDAudioSource source(DemoSongs, DemoSongsCount);
 SIDSizeSource sidSize(source);
-AudioKitStream kit;
+AudioBoardStream kit(AudioKitEs8388V1);
 SIDPlayer sid(source, kit, sidSize);
 
 void previous(bool, int, void*) { TRACEI(); sid.previous(); }

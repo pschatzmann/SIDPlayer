@@ -23,7 +23,7 @@ const char *startFilePath="/SID";
 const char* ext="sid";
 AudioSourceIdxSD source(startFilePath, ext, CS);
 SizeSourceFile fileSize(source);
-I2SStream out; // or replace with your Output Device e.g. AudioKitStream
+I2SStream out; // or replace with your Output Device e.g. AudioBoardStream
 SIDPlayer sid(source, out, fileSize);
 AudioActions actions;
 
