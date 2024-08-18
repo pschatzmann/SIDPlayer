@@ -71,6 +71,9 @@ $(function() {
 <p>Unfortunately we can not feed SID files incrementally to a codec, so this does not fit with my audio codecs that are used e.g. in the AudioPlayer of the AudioTools library.</p>
 <p>Therefore this project provides a separate, dedicated <b>SID stream</b> and a <b>SID player</b> that can play SID from files or from in memory hex dumps <b>on Arduino</b>. The player is based on the AudioPlayer from the <a href="https://github.com/pschatzmann/arduino-audio-tools">Arduino Audio Tools</a>, so you can use <b>different audio sources and audio sinks</b>. The SID emulation is based on cSID light by Hermit (Mihaly Horvath), (Year 2017).</p>
 <h2><a class="anchor" id="autotoc_md1"></a>
+Memory Requirements</h2>
+<p>You can set the RAM implementation in the config file (<a class="el" href="SIDConfig_8h_source.html">SIDConfig.h</a>): In most cases it is using <b>64KB fixed</b>. By default this memory is reserved statically. You can also select to use PSRAM instead of RAM. There is also an experimenal memory implementation that can directly use the song stored in PROGMEM and just needs around 2K of additinal RAM.</p>
+<h2><a class="anchor" id="autotoc_md2"></a>
 Documentation</h2>
 <ul>
 <li><a href="https://pschatzmann.github.io/SIDPlayer/docs/html/annotated.html">Class Documentation</a></li>
@@ -78,11 +81,11 @@ Documentation</h2>
 <li><a href="https://pschatzmann.github.io/arduino-audio-tools/group__io.html">Supported Output Devices</a></li>
 <li><a href="https://github.com/pschatzmann/arduino-audio-tools/wiki">AudioTools Wiki</a></li>
 </ul>
-<h2><a class="anchor" id="autotoc_md2"></a>
+<h2><a class="anchor" id="autotoc_md3"></a>
 Installation</h2>
 <p>For Arduino you can download the library as zip and call include Library -&gt; zip library. Or you can git clone this project into the Arduino libraries folder e.g. with</p>
 <div class="fragment"><div class="line">cd  ~/Documents/Arduino/libraries</div>
-<div class="line">git clone pschatzmann/SIDPlayer.git</div>
+<div class="line">git clone https://github.com/pschatzmann/SIDPlayer.git</div>
 </div><!-- fragment --><p>And please do not forget to also install the <a href="https://github.com/pschatzmann/arduino-audio-tools">AudioTools</a>! </p>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
