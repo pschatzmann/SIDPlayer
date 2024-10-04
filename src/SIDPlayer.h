@@ -178,7 +178,7 @@ protected:
   size_t timeout_sec = 0;
   size_t playing_timout_ms = 0;
 
-  Print *getOutput() { return player.getVolumeOutput(); }
+  Print* getOutput() { return & (player.getVolumeStream()); }
 
   void loadSID() {
     TRACEI();
